@@ -1,0 +1,196 @@
+/* Allgemeines Styling & Hintergrund */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0a0a0c;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+/* 🌌 Das LOBBY Layout */
+.lobby-universe {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  color: #8c7cff;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+header p {
+  color: #a0a0ab;
+  font-size: 1.1rem;
+}
+
+/* ⚡ Die Log-Leiste (Aktivitäten) */
+.activity-section {
+  background: #141419;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.activity-section h3 {
+  color: #8c7cff;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #27272a;
+  padding-bottom: 10px;
+}
+
+.recent-activities-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activity-item {
+  background: #1c1c24;
+  border-left: 4px solid #8c7cff;
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.log-time {
+  color: #71717a;
+  font-size: 0.85rem;
+}
+
+.loading-text {
+  color: #71717a;
+  font-style: italic;
+  text-align: center;
+}
+
+/* 🔐 Das Auth-Overlay (Fenster im Vordergrund) */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.auth-card {
+  background: #141419;
+  border: 2px solid #8c7cff;
+  box-shadow: 0 0 30px rgba(140, 124, 255, 0.25);
+  border-radius: 14px;
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.auth-header h2 {
+  color: #8c7cff;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+.auth-header p {
+  text-align: center;
+  color: #a0a0ab;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #8c7cff;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.input-group input {
+  background: #1c1c24;
+  border: 1px solid #3f3f46;
+  border-radius: 8px;
+  padding: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: #8c7cff;
+  background: #23232e;
+  box-shadow: 0 0 10px rgba(140, 124, 255, 0.15);
+}
+
+.auth-btn {
+  background: #8c7cff;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.auth-btn:hover {
+  background: #7362e3;
+  transform: translateY(-1px);
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #a0a0ab;
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.auth-switch a {
+  color: #8c7cff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Kleine Animation beim Hinzufügen von Logs */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOBBY — Holographic Universe</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- 🌌 DEIN LOBBY-LAYOUT -->
+    <div class="lobby-universe">
+      <header>
+        <h1>LOBBY UNIVERSE</h1>
+        <p>Dein Platz im Internet. 🪐</p>
+      </header>
+
+      <main>
+        <div style="text-align: center; margin: 20px 0">
+          <a
+            href="page2.html"
+            style="
+              display: inline-block;
+              padding: 14px 28px;
+              background: linear-gradient(135deg, #7c3aed, #06b6d4);
+              color: white;
+              text-decoration: none;
+              border-radius: 12px;
+              font-weight: bold;
+              box-shadow: 0 0 18px #7c3aed66;
+            "
+          >
+            🪐 LOBBY betreten
+          </a>
+        </div>
+
+        <!-- AKTIVITÄTS-LOG-LEISTE -->
+        <section class="activity-section">
+          <h3>⚡ RECENT ACTIVITIES (Live-Logs)</h3>
+          <div class="recent-activities-container">
+            <!-- Logs werden hier automatisch reingeladen -->
+            <button
+              id="openLogBtn"
+              style="
+                margin: 15px 0;
+                padding: 10px;
+                background: #9b51e0;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                width: 100%;
+              "
+            >
+              🌐 Log-Fenster öffnen
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- 🔐 AUTH-OVERLAY (ANMELDE- & REGISTRIERUNGSFENSTER) -->
+    <div id="auth-modal" class="auth-overlay">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>LOBBY LOGIN</h2>
+          <p id="auth-subtitle">Melde dich an, um deinen Orbit zu betreten.</p>
+        </div>
+
+        <!-- Formular A: LOGIN -->
+        <form id="login-form">
+          <div class="input-group">
+            <label>E-Mail-Adresse</label>
+            <input
+              type="email"
+              id="login-email"
+              required
+              placeholder="name@beispiel.de"
+            />
+          </div>
+          <div class="input-group">
+            <label>Passwort</label>
+            <input
+              type="password"
+              id="login-password"
+              required
+              placeholder="••••••••"
+            />
+          </div>
+          <button type="submit" class="auth-btn">Orbit betreten</button>
+          <p class="auth-switch">
+            Neu hier? <a href="#" id="go-to-register">Konto erstellen</a>
+          </p>
+        </form>
+
+        <!-- Formular B: REGISTRIERUNG -->
+        <form id="register-form" style="display: none">
+          <div class="input-group">
+            <label>Dein Creator/Nutzer-Name</label>
+            <input
+              type="text"
+              id="register-username"
+              required
+              placeholder="z.B. Alex_Explorer"
+            />
+          </div>
+          <div class="input-group">
+            <label>E-Mail-Adresse</label>
+            <input
+              type="email"
+              id="register-email"
+              required
+              placeholder="name@beispiel.de"
+            />
+          </div>
+          <div class="input-group">
+            <label>Passwort</label>
+            <input
+              type="password"
+              id="register-password"
+              required
+              placeholder="Mind. 6 Zeichen"
+            />
+          </div>
+          <button type="submit" class="auth-btn">Welt erschaffen</button>
+          <p class="auth-switch">
+            Bereits ein Profil? <a href="#" id="go-to-login">Hier einloggen</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- 🧠 DAS LOKALE GEDÄCHTNIS (LOCAL STORAGE) -->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        // 💾 DATEN BEIM STARTEN AUS DEM CHROMEBOOK-SPEICHER LADEN
+        // Falls noch nichts gespeichert ist, starten wir mit leeren Listen []
+        let registrierteUser =
+          JSON.parse(localStorage.getItem('lobby_users')) || [];
+        let verlaufLogs = JSON.parse(localStorage.getItem('lobby_logs')) || [];
+
+        // 1. Formular-Umschalter (Login <-> Registrierung)
+        document
+          .getElementById('go-to-register')
+          ?.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+            document.getElementById('auth-subtitle').innerText =
+              'Erstelle dein Profil für das LOBBY-Universum.';
+          });
+
+        document
+          .getElementById('go-to-login')
+          ?.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('auth-subtitle').innerText =
+              'Melde dich an, um dein Universum zu betreten.';
+          });
+
+        // 2. Funktion zum Anzeigen und dauerhaften Speichern der Logs
+        function renderLogs() {
+          const logContainer = document.querySelector(
+            '.recent-activities-container'
+          );
+          if (!logContainer) return;
+
+          logContainer.innerHTML = ''; // Container leeren
+
+          // Wenn noch absolut keine Logs existieren, einen System-Start-Log einfügen
+          if (verlaufLogs.length === 0) {
+            logContainer.innerHTML = `
+            <div class="activity-item">
+              <span class="log-time">[System]</span> 
+              <strong>Orbit-Server</strong> gestartet und bereit dauerhaft zu speichern. 🪐
+            </div>
+          `;
+            return;
+          }
+
+          // Alle gespeicherten Logs auf den Bildschirm zeichnen
+          verlaufLogs.forEach((log) => {
+            const neuerLog = document.createElement('div');
+            neuerLog.className = 'activity-item';
+            neuerLog.innerHTML = `
+            <span class="log-time">[${log.zeit}]</span> 
+            <strong>${log.name}</strong> ${log.text}
+          `;
+            logContainer.appendChild(neuerLog);
+          });
+        }
+
+        function addLogEintrag(username, details) {
+          const jetzt = new Date();
+          const zeitText = jetzt.toLocaleTimeString('de-DE', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          });
+
+          // Neuen Eintrag an den ANFANG der Liste setzen
+          verlaufLogs.unshift({
+            zeit: zeitText,
+            name: username,
+            text: details,
+          });
+
+          // Maximal 15 Einträge behalten, damit die Liste nicht unendlich lang wird
+          if (verlaufLogs.length > 15) verlaufLogs.pop();
+
+          // 💾 In der Chromebook-Mini-Datenbank speichern
+          localStorage.setItem('lobby_logs', JSON.stringify(verlaufLogs));
+
+          // Anzeige aktualisieren
+          renderLogs();
+        }
+
+        // 3. REGISTRIERUNGS-LOGIK (Speichert jetzt dauerhaft!)
+        document
+          .getElementById('register-form')
+          ?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            // Prüfen, ob die E-Mail schon vergeben ist
+            if (registrierteUser.some((u) => u.email === email)) {
+              alert(
+                'Fehler: Diese E-Mail-Adresse wird bereits im Orbit genutzt!'
+              );
+              return;
+            }
+
+            // User in das dauerhafte Array packen
+            registrierteUser.push({ username, email, password });
+
+            // 💾 User-Liste im Chromebook speichern
+            localStorage.setItem(
+              'lobby_users',
+              JSON.stringify(registrierteUser)
+            );
+
+            // Log erzeugen und speichern
+            addLogEintrag(username, 'ist dem Universum neu beigetreten! ✨');
+
+            alert(
+              `Erfolg! Der Account für "${username}" wurde dauerhaft im Orbit gespeichert.`
+            );
+
+            // Zum Login zurückwechseln
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('auth-subtitle').innerText =
+              'Melde dich an, um dein Universum zu betreten.';
+
+            // Felder leeren
+            document.getElementById('register-username').value = '';
+            document.getElementById('register-email').value = '';
+            document.getElementById('register-password').value = '';
+          });
+
+        // 4. LOGIN-LOGIK
+        document
+          .getElementById('login-form')
+          ?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            // In den echten, lokal gespeicherten Usern suchen
+            const gefunden = registrierteUser.find(
+              (u) => u.email === email && u.password === password
+            );
+
+            if (gefunden) {
+              addLogEintrag(
+                gefunden.username,
+                'hat sich im Orbit eingeloggt. 🟢'
+              );
+              alert(
+                `Willkommen zurück, ${gefunden.username}! Das Login war erfolgreich.`
+              );
+              window.location.href = 'page2 (1).html';
+            } else {
+              alert(
+                'Fehler: E-Mail oder Passwort falsch! Bitte registriere dich zuerst, falls du neu bist.'
+              );
+            }
+          });
+
+        // Beim allerersten Starten der Seite die gespeicherten Logs anzeigen
+        renderLogs();
+
+        // Separates LOBBY-Live-Log-Fenster
+        let logWindow = null;
+
+        document.getElementById('openLogBtn')?.addEventListener('click', () => {
+          logWindow = window.open(
+            '',
+            'LobbyLogWindow',
+            'width=480,height=650,resizable=yes,scrollbars=yes'
+          );
+
+          if (!logWindow) {
+            alert('Bitte Pop-ups für LOBBY erlauben.');
+            return;
+          }
+
+          logWindow.document.open();
+          logWindow.document.write(`<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOBBY UNIVERSE – Live-Logs</title>
+<style>
+* { box-sizing: border-box; }
+body {
+margin: 0;
+padding: 20px;
+background: #0d0d13;
+color: #fff;
+font-family: Arial, sans-serif;
+}
+h2 {
+color: #9b51e0;
+border-bottom: 1px solid #29243b;
+padding-bottom: 12px;
+}
+.status { color: #70df9b; font-size: 12px; }
+.log-container {
+display: flex;
+flex-direction: column;
+gap: 12px;
+margin-top: 18px;
+}
+.log-card {
+background: #151522;
+border: 1px solid #2a2a40;
+border-left: 4px solid #9b51e0;
+border-radius: 8px;
+padding: 13px;
+font-size: 14px;
+overflow-wrap: anywhere;
+}
+.log-time {
+display: block;
+color: #aaa0c8;
+font-family: monospace;
+margin-bottom: 7px;
+}
+.log-name { font-weight: bold; }
+.log-details { color: #ddd; margin-top: 7px; }
+button {
+padding: 10px 14px;
+background: #9b51e0;
+color: white;
+border: 0;
+border-radius: 6px;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+<h2>⚡ RECENT ACTIVITIES</h2>
+<div class="status">● LOBBY-Log-System</div>
+<p><button id="refreshLogs">Logs aktualisieren</button></p>
+<div id="logContainer" class="log-container"></div>
+
+<script>
+function refreshLobbyLogs() {
+const container = document.getElementById('logContainer');
+container.replaceChildren();
+
+let logs = [];
+try {
+logs = JSON.parse(localStorage.getItem('lobby_logs') || '[]');
+} catch (error) {
+logs = [];
+}
+
+if (!logs.length) {
+const empty = document.createElement('p');
+empty.textContent = 'Noch keine Aktivitäten vorhanden.';
+container.appendChild(empty);
+return;
+}
+
+logs.forEach(log => {
+const card = document.createElement('div');
+card.className = 'log-card';
+
+const time = document.createElement('span');
+time.className = 'log-time';
+time.textContent = '[' + (log.zeit || '--:--:--') + ']';
+
+const name = document.createElement('div');
+name.className = 'log-name';
+name.textContent = log.name || 'System';
+
+const details = document.createElement('div');
+details.className = 'log-details';
+details.textContent = log.text || 'Aktivität';
+
+card.append(time, name, details);
+container.appendChild(card);
+});
+}
+
+document.getElementById('refreshLogs')
+.addEventListener('click', refreshLobbyLogs);
+
+refreshLobbyLogs();
+
+window.addEventListener('storage', event => {
+if (event.key === 'lobby_logs') refreshLobbyLogs();
+});
+<\/script>
+</body>
+</html>`);
+          logWindow.document.close();
+        });
+
+        // Vorhandene Aktivitäten anzeigen
+        renderLogs();
+      });
+    </script>
+  </body>
+</html>

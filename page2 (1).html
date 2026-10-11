@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09090e"><title>LOBBY — Holographic Universe</title>
+<style>
+:root{--bg:#070b10;--panel:#0c141c;--line:rgba(137,220,255,.17);--text:#effaff;--muted:#8fa7b7;--ice:#b9f0ff;--cyan:#50dfff;--cyan2:#12aeca;--mint:#8fffe1}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -12%,#123345 0,transparent 43%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:-.012em}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.top{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,54px);border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(7,11,16,.83);backdrop-filter:blur(22px);z-index:5}.brand{display:flex;align-items:center;gap:11px;font-size:17px;font-weight:800;letter-spacing:4px}.mark{border:1px solid var(--cyan);color:var(--ice);border-radius:9px;width:34px;height:34px;display:grid;place-items:center;font-size:22px;box-shadow:0 0 22px #50dfff18}.brand small{display:block;font-size:7px;letter-spacing:2px;color:#7193a6;margin-top:4px;font-weight:500}.nav{display:flex;gap:22px;align-items:center;font-size:12px;color:#bfd1dc}.nav a{color:inherit}.nav button,.btn,.filter{cursor:pointer;color:inherit;background:rgba(15,27,37,.82);border:1px solid var(--line);border-radius:9px;padding:11px 15px;transition:transform .2s,border-color .2s,background .2s}.wrap{max-width:1370px;margin:auto;padding:0 clamp(16px,4vw,54px)}.hero{padding:66px 0 34px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}.eyebrow{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);display:flex;align-items:center;gap:10px}.eyebrow:before{content:"";height:1px;width:23px;background:var(--cyan);box-shadow:0 0 9px #50dfff80}h1{font-size:clamp(43px,6.2vw,78px);line-height:.98;letter-spacing:-.075em;margin:20px 0;font-weight:680}h1 span{display:block;color:var(--ice);text-shadow:0 0 36px #50dfff20}.lead{color:var(--muted);line-height:1.85;max-width:570px;font-size:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.btn:hover,.filter:hover,.nav button:hover{border-color:#50dfff80;transform:translateY(-1px)}.btn.primary{background:linear-gradient(115deg,#c4f5ff,#55d8f5);color:#06121a;border-color:transparent;font-weight:750;box-shadow:0 7px 26px #50dfff15}.hint{color:#69899c;font-size:9px;letter-spacing:.7px;margin-top:16px}.heroart{height:286px;border:1px solid var(--line);border-radius:22px;background:radial-gradient(ellipse at center,#153b4a88,transparent 60%),linear-gradient(145deg,#0d1c28,#091018);display:grid;place-items:center;position:relative;overflow:hidden;isolation:isolate}.heroart:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#8feaff08 1px,transparent 1px),linear-gradient(90deg,#8feaff08 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse at center,#000,transparent 78%)}.heroart:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #73e6ff35;border-radius:50%;box-shadow:0 0 0 24px #50dfff08,0 0 0 52px #50dfff05}.orbit{position:absolute;width:215px;height:215px;border:1px solid #73e6ff4a;border-radius:50%;transform:rotateX(67deg) rotateZ(-24deg);animation:float 8s ease-in-out infinite}.orbit.two{width:260px;height:260px;transform:rotateX(67deg) rotateZ(31deg);animation-delay:-3s;border-color:#b9f0ff25}.core{width:84px;height:84px;border:1px solid #b9f0ff88;border-radius:23px;display:grid;place-items:center;background:linear-gradient(145deg,#1a5064,#0a1a26);font-size:30px;color:#d9faff;box-shadow:0 0 50px #50dfff30,inset 0 0 24px #b9f0ff10;z-index:1}.label{position:absolute;background:#09141ddd;border:1px solid var(--line);border-radius:7px;padding:10px 11px;font-size:9px;letter-spacing:.6px;color:#c9e8f3;backdrop-filter:blur(12px)}.l1{top:19px;left:18px}.l2{bottom:19px;right:18px;color:var(--mint)}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:42px 0 18px}.sectionhead h2{font-size:clamp(25px,3vw,36px);letter-spacing:-.05em;margin:9px 0;font-weight:650}.sectionhead p{font-size:12px;color:var(--muted);margin:0}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{padding:8px 12px;border-radius:99px;font-size:11px;color:#9eb8c7}.filter.active{background:#50dfff16;border-color:#50dfff80;color:#e5faff;box-shadow:inset 0 0 14px #50dfff08}.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px}.map{height:510px;border:1px solid #78eaff35;border-radius:20px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#0d5a7180,transparent 38%),radial-gradient(ellipse at 15% 85%,#0b294780,transparent 38%),linear-gradient(135deg,#07131d,#05090f 72%);box-shadow:inset 0 0 70px #35d9ff0b,0 18px 60px #0004}.map:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#80e8ff0b 1px,transparent 1px),linear-gradient(90deg,#80e8ff0b 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(to bottom,#000,transparent 98%)}.map:after{content:"";position:absolute;width:390px;height:390px;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid #64e4ff0d;border-radius:50%;box-shadow:0 0 0 40px #64e4ff04,0 0 0 80px #64e4ff03;pointer-events:none}.maptop{position:absolute;top:16px;left:17px;right:17px;display:flex;justify-content:space-between;color:#7898a9;font-size:9px;letter-spacing:1px;z-index:2}.maptop b{color:var(--mint);font-weight:500}.map svg{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}.link{fill:none;stroke:#66e5ff9c;stroke-width:1.45;stroke-dasharray:2 9;stroke-linecap:round;animation:dash 18s linear infinite;filter:drop-shadow(0 0 5px #50dfff9c)}.place{position:absolute;z-index:2;transform:translate(-50%,-50%);width:115px;text-align:center;border:0;background:none;color:white;padding:0;cursor:pointer;transition:transform .25s}.place:hover,.place[aria-pressed=true]{transform:translate(-50%,-53%) scale(1.055);z-index:3}.place:focus-visible{outline:1px solid #b9f0ff;outline-offset:8px;border-radius:12px}.planet{width:64px;height:64px;border-radius:50%;margin:auto;display:grid;place-items:center;font-size:20px;font-weight:700;background:radial-gradient(circle at 32% 23%,color-mix(in srgb,var(--tone),white 35%),color-mix(in srgb,var(--tone),#07131b 62%) 27%,#07121b 73%);border:1px solid color-mix(in srgb,var(--tone),transparent 15%);box-shadow:0 0 0 5px #50dfff0a,0 8px 28px #0008,0 0 28px color-mix(in srgb,var(--tone),transparent 62%),inset -8px -10px 18px #02070b99;position:relative}.planet:before{content:"";position:absolute;inset:-7px;border:1px solid color-mix(in srgb,var(--tone),transparent 62%);border-radius:50%;transform:scaleX(1.3) rotate(-22deg);box-shadow:0 0 12px color-mix(in srgb,var(--tone),transparent 80%)}.planet:after{content:"";position:absolute;inset:-14px;border:1px solid color-mix(in srgb,var(--tone),transparent 91%);border-radius:50%;transform:scaleX(1.38) rotate(25deg)}.place[aria-pressed=true] .planet{box-shadow:0 0 0 8px #50dfff12,0 0 38px color-mix(in srgb,var(--tone),transparent 47%)}
+/* Custom user planet on the PUBLIC HOME MAP, alongside the other planets. */
+.place[data-place-id="test"]{width:132px;z-index:4}
+.place[data-place-id="test"] .planet{width:72px;height:72px;color:#f8e7a1;background:radial-gradient(circle at 30% 24%,#fff4a8 0%,#f2d45c 20%,#5b9de9 43%,#173a74 67%,#09152c 78%);border:1px solid #f8df79;box-shadow:0 0 0 5px #f5d45b12,0 0 34px #5e9df080,inset -12px -9px 20px #020817aa}
+.place[data-place-id="test"] .planet:before{inset:15px -25px;border:5px solid #e6c95d;border-left-color:#86baf7;border-right-color:#f6e9a2;border-radius:50%;transform:rotate(-23deg) scaleX(1.28);box-shadow:0 0 13px #79b8ff88}
+.place[data-place-id="test"] .planet:after{inset:15px -25px;border:2px solid #8fc6ff;border-radius:50%;transform:rotate(-23deg) scaleX(1.28);opacity:.9}
+.place[data-place-id="test"] .pname{color:#ffe78b;text-shadow:0 0 12px #d8ae48}
+.place[data-place-id="test"] .pcat{color:#a9d6ff}
+.pname{display:block;margin-top:13px;font-size:11px;font-weight:720}.pcat{display:block;font-size:9px;color:#91adbd;margin-top:4px}.pcount{font-size:8px;color:#b2cbd7;margin-top:6px;display:block}.legend{position:absolute;bottom:14px;left:16px;color:#718fa0;font-size:9px;z-index:2;letter-spacing:.4px}.detail{border:1px solid #69e8ff35;border-radius:20px;background:radial-gradient(ellipse at 50% 0%,#0b526b30,transparent 42%),linear-gradient(150deg,#0d1c27,#070d13);padding:17px;min-height:510px;display:flex;flex-direction:column;box-shadow:inset 0 1px #d8f9ff0a,0 18px 48px #0005;position:relative;overflow:hidden}.detail:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 25%,#8ceeff08 50%,transparent 75%);background-size:220% 100%;animation:portalsheen 8s ease-in-out infinite}.detail>*{position:relative;z-index:1}.cover{height:148px;border-radius:14px;display:grid;place-items:center;position:relative;overflow:hidden;border:1px solid #8ceaff45;background:radial-gradient(circle at 50% 45%,#50dfff38,transparent 52%),linear-gradient(145deg,#0d2633,#071019);box-shadow:inset 0 0 35px #50dfff0c}.cover:after{content:"";position:absolute;inset:14px;border:1px solid #83eaff1c;border-radius:50%;transform:scaleX(1.4) rotate(-18deg);box-shadow:0 0 22px #50dfff0b;pointer-events:none}.cover:before{content:"";width:145px;height:145px;border:1px solid #a3efff38;border-radius:50%;box-shadow:0 0 0 17px #d1faff06,0 0 0 36px #d1faff03;position:absolute}.symbol{font-size:45px;z-index:1;color:var(--ice);text-shadow:0 0 12px #50dfff99,0 0 35px #50dfff66;filter:drop-shadow(0 0 12px #50dfff35)}.meta{display:flex;justify-content:space-between;gap:8px;font-size:8px;letter-spacing:1px;color:#8ea9b9;margin:17px 0 8px;text-transform:uppercase}.meta .demo{color:var(--mint)}h3{font-size:23px;letter-spacing:-.04em;margin:0 0 8px;font-weight:650}.detail p{color:var(--muted);font-size:11px;line-height:1.75;margin:0}.tags{display:flex;gap:6px;flex-wrap:wrap;margin:13px 0}.tag{border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-size:8px;color:#b8d2df}.stats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:auto;padding-top:14px}.stat{border:1px solid var(--line);border-radius:9px;padding:10px;background:#07101850}.stat strong{display:block;font-size:17px}.stat span{font-size:8px;color:#829dad}.detail .btn{margin-top:13px;font-size:11px;min-height:46px;letter-spacing:.2px;border-radius:11px;position:relative;overflow:hidden}.detail .btn.primary{background:linear-gradient(110deg,#d5faff,#72e5ff 55%,#a4f2ff);box-shadow:0 0 0 1px #c9f8ff55 inset,0 8px 28px #31d8ff20;color:#06131b;transition:transform .2s,box-shadow .2s,filter .2s}.detail .btn.primary:before{content:"";position:absolute;top:-40%;left:-35%;width:28%;height:180%;background:#ffffff88;filter:blur(9px);transform:skewX(-20deg);transition:left .45s}.detail .btn.primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px #e1fcff inset,0 0 25px #50dfff3b,0 12px 30px #0005;filter:brightness(1.04)}.detail .btn.primary:hover:before{left:120%}.note{font-size:9px;line-height:1.5;color:#718b9a;margin-top:9px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:20px 0 60px}.feature{padding:19px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#0d1922,#091017);min-height:150px}.icon{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;border:1px solid #50dfff38;color:var(--cyan);margin-bottom:14px;background:#50dfff0b}.feature h4{margin:0 0 8px;font-size:13px;font-weight:650}.feature p{margin:0;color:var(--muted);font-size:11px;line-height:1.7}.footer{border-top:1px solid var(--line);padding:24px 0 32px;display:flex;justify-content:space-between;gap:15px;color:#718b9a;font-size:10px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,15px);opacity:0;background:#0e1e28;border:1px solid var(--line);border-radius:10px;padding:12px 15px;font-size:11px;z-index:10;transition:.2s;pointer-events:none;box-shadow:0 12px 45px #0008}.toast.show{opacity:1;transform:translate(-50%,0)}@keyframes float{50%{translate:0 -8px}}@keyframes dash{to{stroke-dashoffset:-240}}@keyframes mapbreath{50%{opacity:.45;transform:translate(-50%,-50%) scale(1.035)}}@keyframes portalsheen{0%,100%{background-position:150% 0;opacity:.45}50%{background-position:-30% 0;opacity:1}}@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}@media(max-width:900px){.hero{grid-template-columns:1fr}.heroart{height:230px}.layout{grid-template-columns:1fr}.detail{min-height:auto}.cover{height:110px}.features{grid-template-columns:1fr 1fr}}@media(max-width:580px){.top{height:65px;padding:0 14px}.brand{font-size:15px;letter-spacing:3px}.nav{gap:10px;font-size:10px}.nav a:nth-child(2){display:none}.wrap{padding:0 14px}.hero{padding-top:38px}.hero h1{font-size:44px}.sectionhead{align-items:start;flex-direction:column}.map{height:500px}.place{width:86px}.planet{width:53px;height:53px;font-size:18px}.pname{font-size:9px}.pcat{font-size:8px}.pcount{font-size:7px}.features{grid-template-columns:1fr}.footer{flex-direction:column}}
+
+.creator-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:20px 0 54px}
+.creator-card{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:linear-gradient(145deg,#0d1922,#080e14);transition:transform .25s,border-color .25s,box-shadow .25s}
+.creator-card:hover{transform:translateY(-4px);border-color:#68e5ff66;box-shadow:0 18px 45px #0005,0 0 25px #50dfff09}
+.creator-banner{height:115px;position:relative;display:grid;place-items:center;overflow:hidden;border-bottom:1px solid #8ceaff20}
+.creator-banner:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#b4f3ff0b 1px,transparent 1px),linear-gradient(90deg,#b4f3ff0b 1px,transparent 1px);background-size:22px 22px}
+.banner-a{background:radial-gradient(circle at 50% 50%,#8d7dff50,transparent 35%),linear-gradient(120deg,#17172d,#09151e)}
+.banner-b{background:radial-gradient(circle at 50% 50%,#ff9fca48,transparent 38%),linear-gradient(120deg,#251524,#09151e)}
+.banner-c{background:radial-gradient(circle at 50% 50%,#5eafff50,transparent 38%),linear-gradient(120deg,#10223a,#09151e)}
+.creator-orbit{font-size:38px;font-weight:800;color:#d9faff;text-shadow:0 0 22px #50dfff80;z-index:1}
+.creator-live{position:absolute;right:11px;top:10px;font-size:8px;letter-spacing:1px;border:1px solid #8ceaff35;background:#07131dcc;border-radius:99px;padding:6px 8px;color:#a8f8e4}
+.creator-info{display:flex;align-items:center;gap:11px;padding:14px 15px 7px}
+.avatar{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#effcff;border:1px solid #9aefff45;box-shadow:0 0 18px #50dfff12}
+.avatar-a{background:linear-gradient(135deg,#7563b8,#122b3b)}.avatar-b{background:linear-gradient(135deg,#9d5d86,#2b1a2b)}.avatar-c{background:linear-gradient(135deg,#397eb2,#14283b)}
+.creator-title h3{font-size:15px;margin:0 0 4px}.creator-title span,.creator-card p,.creator-foot{font-size:10px;color:var(--muted)}
+.creator-card p{padding:0 15px;line-height:1.65;min-height:34px}
+.creator-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px solid #8ceaff12;padding:12px 15px}
+.mini-btn{background:#50dfff0c;color:#d9faff;border:1px solid #50dfff35;border-radius:8px;padding:8px 10px;font-size:10px;white-space:nowrap}
+.mini-btn:hover{background:#50dfff1b;border-color:#50dfff80}
+.room-overlay{position:fixed;inset:0;background:#02070bd9;backdrop-filter:blur(12px);z-index:20;display:none;align-items:center;justify-content:center;padding:18px}
+.room-overlay.open{display:flex}
+.room-panel{width:min(760px,100%);max-height:90vh;overflow:auto;border:1px solid #70e6ff4a;border-radius:20px;background:radial-gradient(ellipse at 50% 0%,#0c465b44,transparent 50%),#091119;box-shadow:0 25px 90px #000b,0 0 50px #50dfff0d}
+.room-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.room-head h3{margin:0;font-size:20px}.room-head small{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.room-close{background:#10212b;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:8px 11px}
+.room-body{display:grid;grid-template-columns:1fr 210px;gap:14px;padding:18px}
+.room-chat,.room-side{border:1px solid var(--line);border-radius:13px;background:#050b11a8;padding:13px}
+.room-chat h4,.room-side h4{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#8db3c6;margin:0 0 12px}
+.chat-lines{display:grid;gap:10px;min-height:180px}
+.chat-line{font-size:11px;color:#c9dce5;line-height:1.5}.chat-line b{color:#9feeff;margin-right:6px}
+.chat-compose{display:flex;gap:7px;margin-top:14px}.chat-compose input{min-width:0;flex:1;background:#0c1821;border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--text);font:inherit;font-size:11px}
+.chat-compose button{background:linear-gradient(110deg,#c8f8ff,#6ce2ff);color:#06121a;border:0;border-radius:8px;padding:0 13px;font-weight:800}
+.room-member{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #8ceaff12;font-size:10px;color:#c8dce6}
+.room-dot{width:7px;height:7px;border-radius:50%;background:#7dffcf;box-shadow:0 0 8px #7dffcf}
+.room-disclaimer{font-size:9px;color:#718b9a;line-height:1.6;margin:0 18px 18px}
+@media(max-width:900px){.creator-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.creator-grid{grid-template-columns:1fr}.room-body{grid-template-columns:1fr}.creator-foot{align-items:flex-start;flex-direction:column}}
+
+
+
+/* Full world-entry dashboard layout based on the supplied reference screenshot.
+   Scope is limited to the world portal; the public landing page remains untouched. */
+.room-panel.world-panel{width:min(1220px,100%);max-height:94vh;overflow:hidden;display:flex;flex-direction:column}
+.world-panel .room-head{flex:0 0 auto}
+.world-panel .world-banner{margin:14px 16px 0;min-height:190px;padding:24px 28px;border-radius:16px}
+.world-panel .world-banner h2{font-size:clamp(27px,4vw,42px);max-width:500px}
+.world-panel .world-banner p{max-width:460px}
+.world-panel .world-core{width:130px;height:130px;font-size:42px;margin-right:12px}
+.world-panel .world-tabs{padding:12px 16px;gap:8px}
+.world-panel .world-content{overflow:auto;padding:16px}
+.world-panel .world-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.world-panel .world-page[data-page="overview"] .world-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.world-panel .world-page[data-page="overview"] .world-tile{min-height:150px}
+.world-panel .world-page[data-page="overview"] .feature-tile{grid-column:span 2;min-height:185px}
+.world-panel .world-page[data-page="overview"] .feature-tile h3{font-size:25px}
+.world-panel .world-page[data-page="overview"] .feature-tile:after{content:"NEXUS FRONTIER";display:block;margin-top:14px;font-size:9px;letter-spacing:2px;color:#b99aff}
+.world-panel .world-page[data-page="overview"] .world-tile:nth-child(2){background:radial-gradient(ellipse at 90% 0%,#9a5cff26,transparent 55%),linear-gradient(145deg,#171023,#0e0a16)}
+.world-panel .world-page[data-page="overview"] .world-tile:nth-child(3){background:radial-gradient(ellipse at 90% 0%,#4b80ff20,transparent 55%),linear-gradient(145deg,#171023,#0e0a16)}
+.world-panel .world-page[data-page="overview"] .world-tile:nth-child(4){background:radial-gradient(ellipse at 90% 0%,#d65bff20,transparent 55%),linear-gradient(145deg,#171023,#0e0a16)}
+.world-panel .world-page[data-page="overview"] .world-action{min-height:34px}
+.world-panel .world-section-head{padding:4px 2px}
+.world-panel .world-section-head h3{font-size:25px}
+.world-panel .stage-visual{height:170px}
+.world-panel .room-disclaimer{flex:0 0 auto;margin:0;padding:10px 18px;background:#0d0915;border-top:1px solid #302044}
+.world-panel .world-tabs .world-tab{font-size:11px;padding:10px 13px}
+.world-panel .world-tabs .world-tab:first-child:before{content:"◈ ";color:#b99aff}
+.world-panel .world-tab[data-panel="stage"]:before{content:"▣ ";color:#b99aff}
+.world-panel .world-tab[data-panel="quests"]:before{content:"✧ ";color:#b99aff}
+.world-panel .world-tab[data-panel="lounge"]:before{content:"◉ ";color:#b99aff}
+.world-panel .world-tab[data-panel="chat"]:before{content:"▤ ";color:#b99aff}
+.world-panel .world-tab[data-panel="profile"]:before{content:"♙ ";color:#b99aff}
+@media(max-width:760px){
+ .room-panel.world-panel{max-height:96vh}
+ .world-panel .world-banner{padding:17px;min-height:150px}
+ .world-panel .world-core{width:72px;height:72px;font-size:25px;margin:0}
+ .world-panel .world-page[data-page="overview"] .world-grid{grid-template-columns:1fr 1fr}
+ .world-panel .world-page[data-page="overview"] .feature-tile{grid-column:span 2}
+}
+@media(max-width:520px){
+ .world-panel .world-page[data-page="overview"] .world-grid,.world-panel .world-grid{grid-template-columns:1fr}
+ .world-panel .world-page[data-page="overview"] .feature-tile{grid-column:auto}
+ .world-panel .world-core{display:none}
+ .world-panel .world-tabs{gap:3px}
+ .world-panel .world-tabs .world-tab{padding:9px 8px;font-size:9px}
+}
+
+/* WORLD ENTRY DASHBOARD — purple reference styling; landing page above stays unchanged */
+.world-panel{width:min(1180px,100%);max-height:94vh;border-color:#6947bb;background:radial-gradient(ellipse at 76% 0%,#47217a55,transparent 42%),#0a0812;box-shadow:0 25px 90px #000c,0 0 55px #8b5cf622}
+.world-panel .room-head{border-color:#302044;background:#100c1b}
+.world-panel .eyebrow,.world-panel .world-kicker,.world-panel .tile-label{color:#b99aff}
+.world-panel .world-banner{border-color:#51317d;background:radial-gradient(ellipse at 80% 50%,#7c3aed55,transparent 48%),linear-gradient(120deg,#211238,#100b1b)}
+.world-panel .world-core{border-color:#9b78ff;color:#d8c5ff;box-shadow:0 0 0 10px #9b78ff0c,0 0 34px #9b78ff2c}
+.world-panel .world-tabs{border-color:#302044;background:#100c1b}
+.world-panel .world-tab.active{border-color:#9b78ff66;background:#8b5cf622;color:#f1eaff}
+.world-panel .world-tile{border-color:#38264f;background:linear-gradient(145deg,#171023,#0e0a16)}
+.world-panel .feature-tile{background:radial-gradient(ellipse at 90% 20%,#7c3aed40,transparent 50%),linear-gradient(145deg,#211331,#100b1b)}
+.world-panel .world-action{border-color:#7752b7;background:#8b5cf61a;color:#e3d4ff}
+.world-panel .world-action:hover{background:#8b5cf633}
+.world-panel .xp-track{background:#2a1b3b}
+.world-panel .xp-track span{background:#b58cff;box-shadow:0 0 12px #a879ff88}
+.world-panel .quest-icon{background:#8b5cf620;color:#c7aaff}
+.world-panel .quest-item{border-color:#38264f;background:#100b19}
+.world-panel .quest-complete{border-color:#7752b7;background:#8b5cf61a;color:#e3d4ff}
+.world-panel .stage-visual{border-color:#63428d;background:radial-gradient(circle at center,#713bb755,transparent 58%),linear-gradient(135deg,#241238,#0d0914)}
+.world-panel .profile-orb{background:linear-gradient(145deg,#7143ad,#20112f);border-color:#9b78ff66}
+.world-panel .badge-row span{border-color:#7752b7;background:#8b5cf612;color:#e3d4ff}
+.world-panel .room-chat,.world-panel .room-side{border-color:#38264f;background:#0d0915}
+.world-panel .chat-compose input{border-color:#38264f;background:#171023}
+.world-panel .chat-compose button{background:linear-gradient(110deg,#d7c4ff,#9563ef);color:#130b20}
+.world-panel .room-close{border-color:#493263;background:#1b1129}
+.world-panel .demo-chip,.world-panel .coming-soon{color:#c4a5ff;border-color:#9b78ff55}
+.world-panel .world-input{border-color:#38264f;background:#0d0915}
+
+.world-banner{margin:18px 20px 0;padding:24px;border:1px solid #69e8ff25;border-radius:15px;display:flex;align-items:center;justify-content:space-between;gap:20px;background:radial-gradient(ellipse at 80% 50%,#1b728333,transparent 48%),linear-gradient(120deg,#0b1d29,#091119)}.world-kicker,.tile-label{font-size:9px;letter-spacing:1.8px;color:#72e6ff;text-transform:uppercase}.world-banner h2{font-size:clamp(23px,4vw,34px);letter-spacing:-.05em;margin:12px 0 8px}.world-banner p,.world-tile p,.world-section-head p{font-size:11px;line-height:1.7;color:var(--muted);margin:0}.world-core{width:94px;height:94px;flex-shrink:0;border:1px solid #8ceeff55;border-radius:50%;display:grid;place-items:center;color:#baf6ff;font-size:31px;box-shadow:0 0 0 10px #50dfff09,0 0 34px #50dfff1c;position:relative}.world-core span{position:absolute;font-size:7px;letter-spacing:1.3px;text-align:center;line-height:1.6;margin-top:67px}.world-tabs{display:flex;gap:6px;overflow-x:auto;padding:15px 20px;border-bottom:1px solid var(--line)}.world-tab{white-space:nowrap;border:1px solid transparent;border-radius:9px;padding:10px 12px;background:transparent;color:#91adbd;font-size:10px}.world-tab.active{border-color:#65e6ff45;background:#50dfff13;color:#e5fbff}.world-tab i{font-style:normal;color:#6fe7ff;font-size:9px}.world-content{padding:18px 20px}.world-page{display:none}.world-page.active{display:block}.world-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.world-tile{border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#0d1a24,#081017);padding:17px;min-width:0}.world-tile h3{font-size:18px;margin:11px 0 8px}.feature-tile{background:radial-gradient(ellipse at 90% 20%,#1c7c9230,transparent 50%),linear-gradient(145deg,#102531,#091119)}.world-action{display:inline-flex;align-items:center;justify-content:center;margin-top:15px;border:1px solid #64e4ff45;border-radius:8px;background:#50dfff0e;color:#c9f7ff;padding:10px 12px;font-size:10px}.world-action:hover{background:#50dfff20}.xp-number{display:flex;align-items:baseline;gap:7px;margin:12px 0}.xp-number strong{font-size:34px;letter-spacing:-1px}.xp-number span{color:#72e6ff;font-size:12px}.xp-track{height:5px;border-radius:10px;background:#152934;margin:12px 0 8px;overflow:hidden}.xp-track span{display:block;height:100%;width:20%;background:#72e6ff;box-shadow:0 0 12px #50dfff88;transition:width .3s}.world-tile small{font-size:9px;color:#819eae}.member-stack{display:flex;margin:16px 0 9px}.member-stack span{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;margin-right:-5px;border:2px solid #0b151d;background:#153847;color:#d5faff;font-size:9px}.member-stack span:last-child{background:#1d303b}.world-section-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:15px}.world-section-head h3{margin:7px 0;font-size:21px}.demo-chip,.coming-soon{font-size:8px;letter-spacing:1px;color:#7ef0cb;border:1px solid #7ef0cb35;padding:7px 9px;border-radius:7px;white-space:nowrap}.stage-visual{height:130px;border:1px solid #62e6ff30;border-radius:10px;background:radial-gradient(circle at center,#1b718b55,transparent 58%),linear-gradient(135deg,#0b2735,#060d13);display:grid;place-items:center;font-size:28px;color:#bdf7ff}.stage-visual span{font-size:8px;letter-spacing:1.5px}.notice{border-top:1px solid var(--line);padding:12px 0}.notice b{font-size:10px;color:#c8f6ff}.notice p{margin-top:5px}.quest-list{display:grid;gap:9px;margin-bottom:15px}.quest-item{display:flex;align-items:center;gap:13px;border:1px solid var(--line);border-radius:12px;padding:13px;background:#09131b}.quest-icon{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#50dfff10;color:#8eeeff;font-size:18px;flex-shrink:0}.quest-item>div:nth-child(2){flex:1}.quest-item b{font-size:11px}.quest-item p{font-size:10px;color:var(--muted);margin:5px 0}.quest-item small{color:#75e9ff;font-size:9px}.quest-complete{border:1px solid #67e7ff40;background:#50dfff10;color:#b9f6ff;border-radius:8px;padding:9px 11px;font-size:10px}.quest-complete:disabled{color:#7ef0cb;border-color:#7ef0cb35;background:#7ef0cb0c}.mini-game{margin-top:12px}.quiz-options{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.quiz-options button{font-size:10px;text-align:left;padding:10px;border:1px solid var(--line);border-radius:8px;color:#c9e3ed;background:#0a1720}.quiz-options button:hover{border-color:#69e8ff80}.lounge-members{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:10px;color:#7ef0cb}.small-muted{font-size:9px;color:var(--muted);line-height:1.6;margin-top:15px}.inline-state{font-size:10px;color:#7ef0cb;margin-top:9px;min-height:14px}.profile-orb{width:58px;height:58px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#1a6075,#0a1822);border:1px solid #75eaff55;font-size:25px;color:#d7faff;margin-bottom:13px}.profile-tile label{display:block;font-size:9px;color:#89a9b9;margin:13px 0 6px}.world-input{display:block;width:100%;box-sizing:border-box;background:#061019;border:1px solid var(--line);border-radius:8px;padding:10px;color:#e8f8ff;font:inherit;font-size:11px}.world-input:focus{outline:1px solid #68e7ff80}.badge-row{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.badge-row span{font-size:9px;color:#c5f3ff;border:1px solid #6ee7ff35;border-radius:7px;padding:8px;background:#50dfff09}
+@media(max-width:580px){.world-banner{margin:12px 12px 0;padding:16px}.world-core{width:65px;height:65px;font-size:22px}.world-core span{margin-top:51px;font-size:6px}.world-content{padding:13px}.world-tabs{padding:12px}.world-grid{grid-template-columns:1fr}.world-section-head{align-items:flex-start;flex-direction:column}.quest-item{align-items:flex-start}.quest-complete{margin-top:6px}}
+
+/* STEP 1: world entry dashboard structure from the reference screenshot */
+.room-panel.world-panel{width:min(1240px,100%);height:min(900px,94vh);max-height:94vh;overflow:hidden;padding:0;border-radius:18px}
+.dashboard-shell{display:grid;grid-template-columns:170px minmax(0,1fr);height:100%;min-height:0;background:#080712}
+.dashboard-sidebar{display:flex;flex-direction:column;gap:7px;padding:20px 12px 14px;background:#070611;border-right:1px solid #261b3c;min-height:0}
+.dashboard-emblem{width:42px;height:42px;margin:0 auto 4px;border:1px solid #a77aff;border-radius:13px;display:grid;place-items:center;font-size:25px;color:#d8c4ff;background:radial-gradient(circle,#6b32a966,#160d27);box-shadow:0 0 22px #9d5cff22}
+.dashboard-brand{text-align:center;font-weight:900;letter-spacing:2.6px;font-size:13px;color:#f3edff}.dashboard-brand span{display:block;font-size:7px;letter-spacing:2px;color:#9b83bc;margin-top:4px}
+.dashboard-side-label{margin:23px 8px 7px;color:#665b7e;font-size:8px;letter-spacing:1.8px}
+.dashboard-nav{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid transparent;border-radius:9px;background:transparent;color:#9689ac;padding:11px 10px;font-size:12px}.dashboard-nav span{font-size:10px}
+.dashboard-nav:hover,.dashboard-nav.active{background:linear-gradient(100deg,#7137bd66,#44206b44);border-color:#9b63e54d;color:#f1e7ff;box-shadow:inset 2px 0 #b68aff}
+.dashboard-sidebar-bottom{margin-top:auto;border-top:1px solid #251a38;padding:14px 3px 0;display:flex;align-items:center;gap:8px;color:#e6d9ff}
+.dashboard-avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#bd61ff,#47206d);font-weight:800}
+.dashboard-sidebar-bottom b{display:block;font-size:9px}.dashboard-sidebar-bottom small{display:block;font-size:8px;color:#8b7ba4;margin-top:4px}
+.dashboard-main{min-width:0;min-height:0;overflow:auto;background:radial-gradient(ellipse at 75% 0%,#29134455,transparent 35%),#0b0914}
+.dashboard-topbar{height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;border-bottom:1px solid #261b3c;background:#0b0914}
+.dashboard-topbar small{display:block;font-size:7px;letter-spacing:1.7px;color:#786a91;margin-bottom:4px}.dashboard-topbar strong{font-size:12px;color:#f2eaff}.dashboard-top-actions{display:flex;align-items:center;gap:12px}.dashboard-online{font-size:8px;color:#73f0c2;letter-spacing:1px}
+.dashboard-world-head{margin:0 20px;padding:15px 0 2px;border:0;background:transparent}.dashboard-world-head h3{font-size:14px;margin:0 0 4px}.dashboard-world-head .eyebrow{font-size:8px;margin-bottom:5px}.dashboard-world-head small{font-size:8px}
+.dashboard-main .world-banner{margin:10px 20px 0;min-height:190px;padding:22px 25px;border-radius:13px;border-color:#523078;background:radial-gradient(ellipse at 77% 45%,#a52dff6b,transparent 35%),radial-gradient(ellipse at 88% 75%,#254bff55,transparent 40%),linear-gradient(110deg,#160e29,#090b1a 58%,#241039);position:relative;overflow:hidden}
+.dashboard-main .world-banner:after{content:"";position:absolute;right:8%;bottom:-40px;width:145px;height:175px;background:linear-gradient(180deg,#151322,#05050c);clip-path:polygon(40% 0,60% 0,72% 18%,82% 28%,100% 40%,88% 49%,76% 45%,78% 100%,24% 100%,26% 45%,12% 50%,0 41%,18% 28%,28% 18%);filter:drop-shadow(0 0 18px #b42fff);opacity:.95}
+.dashboard-main .world-banner h2{position:relative;z-index:1;font-size:clamp(28px,4vw,43px);font-weight:900;letter-spacing:-1.8px;text-transform:uppercase;margin:10px 0 6px;color:#f7f0ff;text-shadow:0 3px 22px #a14dff77}.dashboard-main .world-banner h2:after{content:" FRONTIER";display:block;color:#bd76ff}
+.dashboard-main .world-banner p{position:relative;z-index:1;max-width:290px;font-size:9px;line-height:1.6}.dashboard-main .world-kicker{font-size:8px;letter-spacing:1.6px}.dashboard-main .world-core{display:none}
+.dashboard-main .world-tabs{padding:10px 20px;gap:5px;border-color:#261b3c;background:#0d0a18}.dashboard-main .world-tab{font-size:9px;padding:8px 9px}.dashboard-main .world-content{padding:13px 20px 18px;overflow:visible}
+.dashboard-main .world-section-head{margin-bottom:10px}.dashboard-main .world-section-head h3{font-size:16px}
+.dashboard-main .world-page[data-page="overview"] .world-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.dashboard-main .world-page[data-page="overview"] .feature-tile{grid-column:span 2;min-height:110px}.dashboard-main .world-page[data-page="overview"] .world-tile{padding:12px;min-height:112px;border-radius:11px}
+.dashboard-main .world-page[data-page="overview"] .world-tile h3{font-size:12px}.dashboard-main .world-page[data-page="overview"] .world-tile p{font-size:9px}.dashboard-main .world-page[data-page="overview"] .feature-tile h3{font-size:18px}
+.dashboard-main .world-page[data-page="overview"] .feature-tile:after{content:"FEATURED WORLD";display:block;font-size:7px;letter-spacing:1.8px;color:#c18aff;margin-top:8px}
+.dashboard-main .world-page[data-page="overview"] .xp-number strong{font-size:25px}.dashboard-main .world-page[data-page="overview"] .member-stack span{width:24px;height:24px;font-size:8px}
+.dashboard-main .world-action{font-size:9px;padding:8px 9px;margin-top:9px}.dashboard-main .room-disclaimer{padding:8px 20px;margin:0;background:#0a0812;border-top:1px solid #261b3c;font-size:8px}
+@media(max-width:800px){.dashboard-shell{grid-template-columns:64px minmax(0,1fr)}.dashboard-sidebar{padding:12px 6px}.dashboard-brand,.dashboard-side-label,.dashboard-nav span,.dashboard-sidebar-bottom>div:last-child{display:none}.dashboard-nav{justify-content:center;padding:12px 3px;font-size:15px}.dashboard-sidebar-bottom{justify-content:center}.dashboard-main .world-page[data-page="overview"] .world-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-main .world-page[data-page="overview"] .feature-tile{grid-column:span 2}}
+@media(max-width:540px){.room-panel.world-panel{height:96vh;max-height:96vh}.dashboard-shell{grid-template-columns:48px minmax(0,1fr)}.dashboard-sidebar{padding:9px 3px}.dashboard-emblem{width:30px;height:30px;font-size:18px}.dashboard-nav{padding:10px 1px}.dashboard-topbar{padding:0 10px}.dashboard-main .world-banner{margin:8px 10px 0;padding:15px;min-height:165px}.dashboard-main .world-banner:after{right:1%;width:100px;height:130px}.dashboard-main .world-banner h2{font-size:25px}.dashboard-main .world-banner p{max-width:190px}.dashboard-world-head{margin:0 10px}.dashboard-main .world-tabs{padding:8px 10px;overflow:auto}.dashboard-main .world-content{padding:10px}.dashboard-main .world-page[data-page="overview"] .world-grid{gap:6px}.dashboard-main .world-page[data-page="overview"] .world-tile{padding:9px}.dashboard-main .world-tabs .world-tab{font-size:8px;padding:8px 7px}}
+
+
+/* STEP 2 — detailed screenshot layout: hero, collection, activity, profile, download, achievements */
+.dashboard-main .world-tabs{display:none}
+.dashboard-main .world-content{padding:10px 12px 14px}
+.dashboard-main .world-banner.dashboard-hero{margin:0;min-height:212px;height:100%;padding:17px 14px;display:flex;align-items:stretch;gap:10px;border-radius:12px;background:radial-gradient(circle at 67% 40%,#c92dff55,transparent 30%),radial-gradient(circle at 65% 30%,#6e2cff55,transparent 48%),linear-gradient(110deg,#090d20,#100d25 50%,#070b18)}
+.dashboard-feature-row{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(220px,.8fr);gap:9px;margin:0 12px 0}
+.dashboard-hero-copy{position:relative;z-index:2;min-width:0;flex:1}
+.dashboard-main .world-banner .world-kicker{display:inline-block;background:#1c2e6c;color:#d9d5ff;padding:4px 7px;font-size:7px}
+.dashboard-main .world-banner h2{font-size:clamp(24px,3vw,37px);line-height:.95;margin:12px 0 0;max-width:220px}
+.dashboard-main .world-banner h2:after{content:"";display:none}
+.dashboard-frontier{font-size:clamp(22px,2.8vw,34px)!important;line-height:1;font-weight:900;font-style:italic;letter-spacing:-1.2px;color:#a34bff;margin:0 0 7px!important}
+.dashboard-main .world-banner .dashboard-subtitle{font-size:9px;color:#f1eaff;margin:0 0 13px}
+.dashboard-main .world-banner p:not(.dashboard-frontier):not(.dashboard-subtitle){font-size:8px;line-height:1.7}
+.dashboard-main .world-banner:after{right:19%;bottom:-5px;width:112px;height:155px;background:linear-gradient(180deg,#151322,#03040b);filter:drop-shadow(0 0 15px #9b34ff);opacity:.98}
+.dashboard-main .dashboard-launch{position:relative;z-index:3;background:linear-gradient(100deg,#a94cff,#6222c9);color:white;border:0;border-radius:30px;font-size:8px;padding:8px 13px;box-shadow:0 0 18px #9e4bff2b}
+.dashboard-mission{width:90px;flex-shrink:0;position:relative;z-index:3;align-self:stretch;border:1px solid #302345;border-radius:9px;padding:10px 8px;background:#070815b8;display:flex;flex-direction:column;gap:4px}
+.dashboard-mission small{font-size:6px;color:#9283aa;letter-spacing:.5px}.dashboard-mission b{font-size:7px;color:#eee4ff}.dashboard-mission strong{font-size:7px;color:#fff}
+.dashboard-ring{width:58px;height:58px;border-radius:50%;margin:4px auto 6px;display:grid;place-items:center;background:radial-gradient(circle at center,#0a0b18 57%,transparent 59%),conic-gradient(#a44dff 0 72%,#302040 72% 100%);font-size:12px;font-weight:800;color:#eee0ff}
+.dashboard-collection,.dashboard-module{border:1px solid #211c35;border-radius:11px;background:linear-gradient(145deg,#0c0e1c,#080b16);min-width:0}
+.dashboard-collection{padding:10px;display:flex;flex-direction:column;gap:6px}
+.dashboard-panel-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px;font-size:8px;color:#a69bbd;letter-spacing:.6px}
+.dashboard-panel-title button{border:0;background:transparent;color:#b65aff;font-size:7px;padding:3px}
+.collection-item{display:grid;grid-template-columns:56px minmax(0,1fr) 8px;align-items:center;gap:7px;padding:5px;border:1px solid #1b1c30;border-radius:7px;background:#0a0c19;min-height:43px}
+.collection-art{height:34px;border-radius:4px;display:grid;place-items:center;font-size:20px;color:#e7d5ff}
+.art-one{background:radial-gradient(circle,#a52cff88,transparent 65%),linear-gradient(135deg,#123b5e,#130b28)}
+.art-two{background:radial-gradient(circle,#ff8b2e77,transparent 65%),linear-gradient(135deg,#40210e,#0c111a)}
+.art-three{background:radial-gradient(circle,#00e7a077,transparent 65%),linear-gradient(135deg,#083c38,#0c111a)}
+.art-four{background:radial-gradient(circle,#b13dff88,transparent 65%),linear-gradient(135deg,#37135c,#0c111a)}
+.collection-item b{display:block;font-size:7px;color:#eae2f7;white-space:nowrap}.collection-item small{display:block;font-size:6px;color:#928aa5;margin-top:2px;white-space:nowrap}.collection-item i,.activity-card i{display:block;height:3px;background:#1d1b2c;border-radius:5px;overflow:hidden;margin-top:3px}.collection-item i span,.activity-card i span{display:block;height:100%;background:#a34bff}
+.dashboard-overview-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"activities player" "download achievements";gap:9px}
+.dashboard-module{padding:10px}
+.dashboard-activities{grid-area:activities}.dashboard-player{grid-area:player}.dashboard-download{grid-area:download}.dashboard-achievements{grid-area:achievements}
+.activity-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.activity-card{min-width:0;padding:8px 4px 6px;border:1px solid #202036;border-radius:7px;background:linear-gradient(160deg,#111529,#0b0d18);display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
+.activity-icon{width:33px;height:33px;border-radius:9px;display:grid;place-items:center;font-size:22px;background:#101a2a}
+.activity-icon.cyan,.ach.cyan{color:#3cecff}.activity-icon.gold,.ach.gold{color:#ffbb4d}.activity-icon.green,.ach.green{color:#2af2a3}.activity-icon.purple,.ach.purple{color:#b34cff}.ach.red{color:#ff4c5c}
+.activity-card b{font-size:6px;line-height:1.4;color:#f0eafa;min-height:17px}.activity-card small{font-size:6px;line-height:1.35;color:#8c849e;min-height:12px}.activity-card strong{font-size:7px;color:#d8c7ef}.activity-card i{width:90%}.activity-card i span{background:#27dff5}
+.player-row{display:flex;align-items:center;gap:10px;position:relative;overflow:hidden}
+.player-row:after{content:"";position:absolute;right:0;top:8px;width:50%;height:48px;background:linear-gradient(160deg,transparent 35%,#5530a877 37%,transparent 40%,transparent 54%,#3e8bff66 57%,transparent 60%);pointer-events:none}
+.player-portrait{width:57px;height:57px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;border:3px solid #a64aff;box-shadow:0 0 0 3px #5d268f55;background:radial-gradient(circle at 50% 35%,#6b89a8,#111426 52%,#03040b);font-size:28px}
+.player-data{min-width:0;flex:1}.player-data>b{font-size:12px;color:#f2eaff}.player-data>small{display:block;font-size:7px;color:#9e8eb7;margin-top:2px}
+.player-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}.player-stats strong{display:block;font-size:9px;color:#e9e0f6;white-space:nowrap}.player-stats small{font-size:6px;color:#8f849f}
+.top-played{display:flex;align-items:center;gap:7px;margin-top:12px;padding:6px;border:1px solid #211c35;border-radius:7px;background:#0a0b17}.top-played>span{width:30px;height:25px;display:grid;place-items:center;background:#3d1765;color:#d9a4ff;border-radius:4px}.top-played div{flex:1}.top-played div small,.top-played div b{display:block;font-size:6px;color:#aaa0bc}.top-played div b{font-size:7px;color:#e8def7;margin-top:3px}.top-played>small{font-size:6px;color:#827994}.top-played button{border:0;border-radius:50%;width:20px;height:20px;background:#6129a1;color:white;font-size:8px}
+.download-row{display:flex;align-items:center;gap:9px}.download-art{width:62px;height:46px;display:grid;place-items:center;border-radius:5px;background:radial-gradient(circle,#21a9d877,transparent 60%),linear-gradient(135deg,#073a5a,#15102b);font-size:28px;color:#a7f4ff;flex-shrink:0}.download-info{flex:1;min-width:0}.download-info b{display:block;font-size:8px;color:#e8e0f4}.download-info small{display:block;font-size:6px;color:#8f849f;margin-top:3px}.download-track{height:4px;background:#211c32;border-radius:4px;margin-top:7px;overflow:hidden}.download-track span{display:block;width:43%;height:100%;background:#a54aff}.download-pause{border-radius:50%;width:22px;height:22px;background:#17172b;display:grid;place-items:center;color:#b8a9d3;font-size:10px}
+.achievement-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.achievement-grid>div{display:flex;align-items:center;flex-direction:column;gap:4px;padding:6px 2px;border:1px solid #1e1b31;border-radius:6px;background:#0b0d19;text-align:center;min-width:0}.ach{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;background:#13142a;font-size:20px}.achievement-grid b{font-size:5px;line-height:1.3;color:#ded3ee}.achievement-grid small{font-size:6px;color:#8c819d}
+.dashboard-legacy-features{display:none}
+.dashboard-main .world-content{padding-top:10px}
+@media(max-width:760px){.dashboard-feature-row{grid-template-columns:1fr}.dashboard-main .world-banner.dashboard-hero{min-height:200px}.dashboard-collection{display:grid;grid-template-columns:1fr 1fr}.dashboard-collection .dashboard-panel-title{grid-column:1/-1}.dashboard-overview-grid{grid-template-columns:1fr;grid-template-areas:"activities" "player" "download" "achievements"}}
+@media(max-width:500px){.dashboard-main .world-banner.dashboard-hero{padding:12px 9px;gap:5px}.dashboard-mission{width:76px}.dashboard-main .world-banner:after{right:25%;width:80px;height:125px}.activity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.achievement-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.collection-item{grid-template-columns:44px minmax(0,1fr) 6px}.player-stats{grid-template-columns:repeat(2,1fr)}}
+
+
+/* STEP 3 — visual polish: spacing, typography, glow, alignment and responsive balance */
+.dashboard-main{scrollbar-color:#3d2559 #090812;scrollbar-width:thin}
+.dashboard-main::-webkit-scrollbar{width:7px}.dashboard-main::-webkit-scrollbar-track{background:#090812}.dashboard-main::-webkit-scrollbar-thumb{background:#3d2559;border-radius:8px}
+.dashboard-shell{background:#050610}
+.dashboard-sidebar{background:linear-gradient(180deg,#060711,#080713 65%,#060610);padding-top:24px}
+.dashboard-emblem{width:46px;height:46px;border-radius:14px;font-size:27px;border-color:#b27aff;background:radial-gradient(circle at 50% 40%,#8e3cff88,#1b0d30 72%);box-shadow:0 0 26px #8d35ff38,inset 0 0 14px #c99aff18}
+.dashboard-nav{min-height:31px;letter-spacing:.1px}
+.dashboard-nav.active{background:linear-gradient(100deg,#7429c5aa,#3b1b5d55);border-color:#9c55ef88;box-shadow:inset 2px 0 #c78cff,0 0 18px #832eff16}
+.dashboard-topbar{height:62px;background:linear-gradient(90deg,#070812,#0b0916);padding-inline:22px}
+.dashboard-topbar strong{font-size:13px;letter-spacing:.2px}
+.dashboard-online{padding:6px 8px;border:1px solid #48d7a32e;border-radius:99px;background:#36c9940c}
+.dashboard-world-head{padding-top:12px;margin-inline:18px}
+.dashboard-world-head .eyebrow{color:#b887ff}
+.dashboard-main .world-banner.dashboard-hero{min-height:216px;box-shadow:inset 0 0 34px #a43bff0b,0 9px 25px #0004}
+.dashboard-feature-row{gap:10px;margin-inline:12px}
+.dashboard-main .world-banner .world-kicker{border:1px solid #5540a8;background:linear-gradient(90deg,#19285f,#2c1760);border-radius:3px;letter-spacing:.7px}
+.dashboard-main .world-banner h2{font-size:clamp(27px,3.1vw,40px);letter-spacing:-1.5px;margin-top:13px;text-shadow:0 0 22px #c94aff24}
+.dashboard-frontier{font-size:clamp(24px,2.7vw,35px)!important;letter-spacing:-1.4px!important;margin-top:1px!important;text-shadow:0 0 18px #a12cff30}
+.dashboard-main .world-banner .dashboard-subtitle{margin-bottom:10px}
+.dashboard-main .world-banner:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#070816 0%,transparent 45%,#12082244 100%),radial-gradient(circle at 65% 38%,#d92fff24,transparent 30%);pointer-events:none;z-index:1}
+.dashboard-main .world-banner:after{right:17%;bottom:-5px;width:120px;height:163px;clip-path:polygon(42% 0,59% 1%,65% 10%,72% 18%,79% 23%,91% 33%,100% 40%,89% 47%,79% 43%,77% 57%,83% 100%,20% 100%,27% 58%,23% 45%,12% 49%,0 41%,15% 29%,28% 22%,34% 12%);background:linear-gradient(90deg,#090a15,#171326 48%,#05050b);filter:drop-shadow(0 0 13px #b42fff);z-index:1}
+.dashboard-mission{background:linear-gradient(160deg,#090918e8,#0a0917e8);border-color:#38254f;padding:11px 9px}
+.dashboard-ring{width:62px;height:62px;font-size:13px;box-shadow:0 0 16px #8d3eff19}
+.dashboard-collection{padding:10px 9px;gap:6px;background:linear-gradient(145deg,#0d0e1c,#080a14);box-shadow:0 9px 24px #0003}
+.dashboard-panel-title{font-size:8px;letter-spacing:.75px;margin-bottom:8px}
+.dashboard-panel-title button{font-weight:700;letter-spacing:.4px}
+.collection-item{grid-template-columns:60px minmax(0,1fr) 8px;min-height:44px;padding:5px 6px;transition:border-color .18s,background .18s}
+.collection-item:hover{border-color:#543176;background:#100d20}
+.collection-art{height:36px;position:relative;overflow:hidden}
+.collection-art:after{content:"";position:absolute;inset:0;background:linear-gradient(125deg,transparent 20%,#ffffff10 50%,transparent 70%)}
+.collection-item b{font-size:7.5px;letter-spacing:.1px}
+.collection-item small{font-size:6.5px}
+.collection-item i span{background:linear-gradient(90deg,#7139c7,#b54bff)}
+.dashboard-overview-grid{gap:9px}
+.dashboard-module{padding:10px 11px;background:linear-gradient(145deg,#0d0f1e,#080a14);box-shadow:0 7px 22px #0002}
+.activity-card{padding:9px 4px 7px;background:linear-gradient(160deg,#111426,#0a0c17);transition:transform .18s,border-color .18s}
+.activity-card:hover{transform:translateY(-2px);border-color:#493065}
+.activity-icon{width:35px;height:35px;box-shadow:inset 0 0 15px #ffffff05}
+.activity-card i span{background:linear-gradient(90deg,#24d8ed,#7e7bff)}
+.dashboard-player{background:radial-gradient(ellipse at 70% 20%,#48216b22,transparent 55%),linear-gradient(145deg,#0d0f1e,#080a14)}
+.player-portrait{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 35%,#b0b4dc 0,#39405f 20%,#17172a 48%,#070812 70%);box-shadow:0 0 0 3px #6d2ca655,0 0 22px #a344ff29}
+.player-portrait:after{content:"";position:absolute;inset:8px 10px 0;border-radius:50%;background:linear-gradient(145deg,#111322 30%,#070812 70%);clip-path:polygon(32% 0,68% 0,88% 27%,74% 48%,84% 100%,16% 100%,26% 48%,12% 27%)}
+.player-stats strong{font-size:9.5px}
+.top-played>span{background:radial-gradient(circle,#a344ff88,#231039);border:1px solid #733bb0}
+.dashboard-download,.dashboard-achievements{min-height:87px}
+.download-art{position:relative;overflow:hidden;background:radial-gradient(circle at 45% 40%,#1bc4f455,transparent 60%),linear-gradient(135deg,#0b4564,#110d27)}
+.download-art:after{content:"";position:absolute;inset:7px 14px 0;background:linear-gradient(180deg,#172236,#080a14);clip-path:polygon(38% 0,62% 0,73% 20%,90% 34%,100% 45%,83% 52%,77% 100%,23% 100%,17% 52%,0 45%,10% 34%,27% 20%);opacity:.9}
+.download-track span{background:linear-gradient(90deg,#7a2ce2,#bd54ff)}
+.achievement-grid>div{transition:transform .18s,border-color .18s}
+.achievement-grid>div:hover{transform:translateY(-2px);border-color:#493065}
+.ach{width:30px;height:30px;box-shadow:inset 0 0 12px #ffffff06}
+.dashboard-main .world-content{padding-inline:12px}
+.dashboard-main .world-page[data-page="overview"] .world-grid{gap:9px}
+.dashboard-main .world-page[data-page="overview"] .world-tile{border-color:#29213b}
+.dashboard-main .world-action{transition:transform .18s,filter .18s,border-color .18s}
+.dashboard-main .world-action:hover{transform:translateY(-1px);filter:brightness(1.13);border-color:#a35de8}
+@media(min-width:1000px){
+ .dashboard-main .world-banner.dashboard-hero{min-height:222px}
+ .dashboard-feature-row{grid-template-columns:minmax(0,1.42fr) minmax(250px,.78fr)}
+ .dashboard-overview-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+}
+@media(max-width:760px){
+ .dashboard-feature-row{margin-inline:10px}
+ .dashboard-collection{gap:6px}
+ .dashboard-main .world-banner:after{right:23%}
+ .dashboard-main .world-content{padding-inline:10px}
+}
+@media(max-width:500px){
+ .dashboard-main .world-banner:after{right:22%;opacity:.75}
+ .dashboard-mission{width:72px;padding:8px 6px}
+ .dashboard-ring{width:50px;height:50px}
+ .dashboard-main .world-banner h2{font-size:24px}
+ .dashboard-frontier{font-size:22px!important}
+}
+
+
+/* PERSONAL PLANET: embedded inside the existing world overview */
+.test-planet-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.78fr);gap:18px;align-items:center;margin:0 0 12px;padding:18px 20px;border:1px solid #d8b84c55;border-radius:13px;background:radial-gradient(ellipse at 80% 45%,#174d8b55,transparent 43%),linear-gradient(115deg,#12152a,#101629 58%,#17182a);overflow:hidden;position:relative}.test-planet-copy{position:relative;z-index:2}.test-planet-kicker,.admin-eyebrow{font-size:8px;letter-spacing:1.8px;color:#f1d66b}.test-planet-card h3{font-size:25px;color:#f6edc4;margin:8px 0}.test-planet-card p{font-size:10px;line-height:1.7;color:#c0c9df;max-width:410px}.test-planet-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.test-planet-tags span{border:1px solid #8bbce65c;background:#0e294455;color:#d9e9ff;padding:6px 8px;border-radius:20px;font-size:8px}.saturn-scene{height:170px;position:relative;display:grid;place-items:center;isolation:isolate}.saturn-ball{width:100px;height:100px;border-radius:50%;z-index:2;background:radial-gradient(circle at 31% 23%,#fff1a5 0,#f8d65a 19%,#4a9fe1 39%,#2861a8 57%,#101a3a 78%);box-shadow:inset -16px -13px 20px #080d25c9,0 0 25px #6abaff55,0 0 60px #f2d45b22;position:relative}.saturn-ball:after{content:"";position:absolute;inset:20% 0 18%;border-radius:50%;background:repeating-linear-gradient(0deg,transparent 0 8px,#f6df8a80 9px 12px,transparent 13px 18px);opacity:.65;clip-path:ellipse(49% 50% at 50% 50%)}.saturn-ring{position:absolute;width:190px;height:64px;border:10px solid #e8cf77;border-left-color:#72b8e8;border-right-color:#9ed6f2;border-radius:50%;transform:rotate(-17deg) scaleY(.72);box-shadow:0 0 15px #e6d07844}.saturn-ring-back{z-index:1;clip-path:inset(0 0 48% 0)}.saturn-ring-front{z-index:3;clip-path:inset(45% 0 0 0);border-top-color:#5a9cd1}.saturn-label{position:absolute;bottom:1px;right:3px;color:#a6bdd9;font-size:7px;letter-spacing:1.3px}
+/* Admin console: six planned management sections */
+.admin-entry[hidden]{display:none!important}.admin-entry{color:#e8d6ff!important;border-color:#7545a855!important;background:#5c2e9220!important}.admin-side-label{color:#c3a4ee!important}.admin-area{padding:18px 20px 22px;color:#f1eaff}.admin-area[hidden]{display:none!important}.admin-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}.admin-heading h2{font-size:25px;margin:7px 0}.admin-heading p{font-size:10px;line-height:1.6;color:#9d91b4;margin:0;max-width:480px}.admin-role{border:1px solid #b887ff55;color:#d8b7ff;background:#7d39c51c;border-radius:20px;padding:8px 10px;font-size:8px;white-space:nowrap}.admin-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:13px}.admin-stats>div{padding:12px;border:1px solid #2a203c;border-radius:10px;background:#0b0a16}.admin-stats small,.admin-stats span{display:block;color:#8f82a7;font-size:8px}.admin-stats strong{display:block;font-size:20px;margin:7px 0}.admin-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:12px;align-items:start}.admin-menu{display:grid;grid-template-columns:1fr;align-content:start;gap:7px;padding:10px;border:1px solid #29203b;background:#090812;border-radius:11px}.admin-menu-item{display:flex;gap:9px;align-items:center;text-align:left;border:1px solid transparent;border-radius:7px;background:transparent;color:#a99abb;padding:10px 8px;font-size:10px}.admin-menu-item span{font-size:10px}.admin-six-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-six-grid button{min-height:82px;border-color:#4a3564;background:linear-gradient(145deg,#171026,#0e0c18)}.admin-six-grid button:hover{border-color:#a96df2;background:#201332}.admin-six-grid button b{font-size:11px}.admin-six-grid button small{font-size:9px;line-height:1.5}.admin-menu-item.active,.admin-menu-item:hover{background:#7d39c526;border-color:#a96df24d;color:#f5eaff}.admin-content{min-width:0;border:1px solid #29203b;background:#090812;border-radius:11px;padding:15px;min-height:280px}.admin-panel{display:none}.admin-panel.active{display:block}.admin-panel h3{font-size:18px;margin:8px 0}.admin-panel p{font-size:10px;color:#a89ab9;line-height:1.7}.admin-quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:15px}.admin-quick-grid button{display:flex;flex-direction:column;gap:6px;text-align:left;border:1px solid #322545;background:#100d1d;border-radius:9px;padding:12px;color:#e9ddfa}.admin-quick-grid b{font-size:10px}.admin-quick-grid small{font-size:8px;color:#a495b7}.admin-record{display:grid;grid-template-columns:1fr auto;gap:4px;padding:11px 0;border-top:1px solid #29203b}.admin-record b{font-size:10px}.admin-record span{grid-column:1;color:#a89ab9;font-size:9px}.admin-record em{grid-column:2;grid-row:1/3;align-self:center;font-size:8px;color:#d9bdff;font-style:normal}.admin-placeholder{margin-top:14px;padding:15px;border:1px dashed #49345d;border-radius:8px;color:#a99abc;font-size:10px}.admin-setting{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #29203b;font-size:10px;color:#ddd0ee}.admin-setting select{max-width:170px;background:#100d1d;border:1px solid #49345d;border-radius:7px;padding:7px;color:#e8dcf7;font-size:9px}.admin-warning{font-size:9px;line-height:1.6;color:#e5c77e;background:#3c2d111c;border:1px solid #80682b55;border-radius:8px;padding:10px;margin-top:12px}
+.admin-mode .dashboard-feature-row,.admin-mode .dashboard-world-head,.admin-mode .world-tabs,.admin-mode .world-content>.world-page,.admin-mode .room-disclaimer{display:none!important}.admin-mode .admin-area{display:block!important}.admin-mode .dashboard-topbar strong{color:#e5c5ff}
+@media(max-width:760px){.admin-six-grid{grid-template-columns:1fr}.test-planet-card{grid-template-columns:1fr}.saturn-scene{height:145px}.admin-layout{grid-template-columns:1fr}.admin-menu{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-menu-item{padding:8px 6px}.admin-stats{grid-template-columns:1fr}.admin-area{padding:13px}.admin-quick-grid{grid-template-columns:1fr}}
+
+
+/* Creator worlds use a simple neutral portal. Only Alex's own "test" world keeps the custom Saturn/dashboard design. */
+#roomOverlay .world-panel.basic-world .test-planet-card{display:none!important}
+#roomOverlay .world-panel.basic-world .dashboard-shell{background:#11151b!important;color:#e7ebf0!important}
+#roomOverlay .world-panel.basic-world .dashboard-sidebar{background:#151a21!important;border-right:1px solid #303741!important;box-shadow:none!important}
+#roomOverlay .world-panel.basic-world .dashboard-emblem{background:#252c35!important;box-shadow:none!important;color:#c4ccd6!important}
+#roomOverlay .world-panel.basic-world .dashboard-brand span,#roomOverlay .world-panel.basic-world .dashboard-side-label,#roomOverlay .world-panel.basic-world .dashboard-nav{color:#aab3bf!important}
+#roomOverlay .world-panel.basic-world .dashboard-nav.active,#roomOverlay .world-panel.basic-world .dashboard-nav:hover{background:#242b34!important;color:#fff!important;box-shadow:none!important}
+#roomOverlay .world-panel.basic-world .dashboard-main,#roomOverlay .world-panel.basic-world .world-content{background:#11151b!important}
+#roomOverlay .world-panel.basic-world .dashboard-topbar{background:#151a21!important;border-bottom:1px solid #303741!important;box-shadow:none!important}
+#roomOverlay .world-panel.basic-world .world-banner,#roomOverlay .world-panel.basic-world .dashboard-module,#roomOverlay .world-panel.basic-world .dashboard-card,#roomOverlay .world-panel.basic-world .activity-card,#roomOverlay .world-panel.basic-world .player-row{background:#191f27!important;border:1px solid #303741!important;box-shadow:none!important;animation:none!important}
+#roomOverlay .world-panel.basic-world .world-banner:before,#roomOverlay .world-panel.basic-world .world-banner:after,#roomOverlay .world-panel.basic-world .dashboard-module:before{display:none!important}
+#roomOverlay .world-panel.basic-world .world-banner h2,#roomOverlay .world-panel.basic-world .dashboard-topbar strong{color:#f0f2f5!important;text-shadow:none!important}
+#roomOverlay .world-panel.basic-world .world-banner p,#roomOverlay .world-panel.basic-world .dashboard-module small{color:#b2bbc6!important}
+#roomOverlay .world-panel.basic-world .world-tab{background:#191f27!important;border-color:#303741!important;color:#b9c2ce!important;box-shadow:none!important}
+#roomOverlay .world-panel.basic-world .world-tab.active{background:#29313b!important;border-color:#687686!important;color:#fff!important}
+#roomOverlay .world-panel.basic-world .dashboard-panel-title button{color:#c6ced8!important}
+
+.admin-world-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 0}
+.admin-action-btn,.admin-world-btn{border:1px solid #7452a0;background:#201431;color:#f2e8ff;border-radius:8px;padding:9px 12px;font-size:10px;font-weight:700}
+.admin-action-btn.primary{background:linear-gradient(120deg,#d6bdff,#a96df2);color:#170b25;border-color:transparent}
+.admin-world-form{display:none;border:1px solid #49345d;background:#100d1d;border-radius:11px;padding:14px;margin:12px 0 16px}
+.admin-world-form.open{display:block}
+.admin-world-form h4{font-size:13px;margin:0 0 12px;color:#f0e5ff}
+.admin-world-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.admin-world-fields label{display:flex;flex-direction:column;gap:5px;color:#b9a8ce;font-size:9px}
+.admin-world-fields input,.admin-world-fields textarea{min-width:0;width:100%;box-sizing:border-box;border:1px solid #49345d;border-radius:7px;background:#090812;color:#f4eaff;padding:9px;font:inherit;font-size:10px}
+.admin-world-fields textarea{min-height:68px;resize:vertical;grid-column:1/-1}
+.admin-world-fields input[type=color]{height:35px;padding:3px}
+.admin-world-form-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px}
+.admin-record-actions{display:flex;gap:6px;align-items:center}
+.admin-edit-world{border:1px solid #5c4775;background:#171022;color:#e8d8ff;border-radius:7px;padding:8px 10px;font-size:9px}
+@media(max-width:560px){.admin-world-fields{grid-template-columns:1fr}.admin-world-fields textarea{grid-column:auto}.admin-record-actions{width:100%}.admin-record-actions button{flex:1}}
+
+.admin-record{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.admin-record .admin-record-copy{flex:1;min-width:170px;display:flex;flex-direction:column;gap:4px}
+.admin-delete-world{border:1px solid #b84a55;background:#381a20;color:#ffdfe2;border-radius:8px;padding:8px 11px;font:inherit;font-size:12px;cursor:pointer}
+.admin-delete-world:hover{background:#56222a}
+.admin-record.is-own-world .admin-delete-world{border-color:#8b7b45;background:#302b1a;color:#f5e6a5}
+@media(max-width:600px){.admin-record{align-items:flex-start}.admin-delete-world{width:100%}}
+</style></head><body>
+<header class="top"><a class="brand" href="#top"><span class="mark">B</span><span>LOBBY<small>DEIN PLATZ IM INTERNET</small></span></a><nav class="nav"><a href="#universe">Universum entdecken</a><a href="#creators">Creator</a><button id="login">Login</button></nav></header>
+<main class="wrap" id="top"><section class="hero"><div><div class="eyebrow">DAS CREATOR-UNIVERSUM</div><h1>Dein Platz.<span>Dein Universum.</span></h1><p class="lead">Entdecke Creator-Orte, besuche digitale Treffpunkte und finde Menschen, die dieselben Dinge feiern wie du. LOBBY verbindet Communitys zu einem Universum.</p><div class="actions"><button class="btn primary" id="explore">Universum entdecken ↗</button><button class="btn" id="creator">Creator-Welten ansehen ↗</button></div><div class="hint">◇ LOKALE DEMO · FIKTIVE CREATOR · KEIN LOGIN · NICHT VERÖFFENTLICHT</div></div><div class="heroart"><div class="orbit"></div><div class="orbit two"></div><div class="core">L.</div><div class="label l1">LOBBY UNIVERSE · ONLINE</div><div class="label l2">07 ORTE VERBUNDEN</div></div></section>
+<section id="universe"><div class="sectionhead"><div><div class="eyebrow">Dein nächster Lieblingsort</div><h2>Finde deinen Orbit.</h2><p>Wähle einen Ort aus, um seine Community zu entdecken.</p></div><div class="filters" id="filters"><button class="filter active" data-filter="Alle">Alle Orte</button><button class="filter" data-filter="Gaming">Gaming</button><button class="filter" data-filter="Musik">Musik</button><button class="filter" data-filter="Chill">Chill</button><button class="filter" data-filter="Kreativ">Kreativ</button></div></div>
+<div class="layout"><div class="map" id="map"><div class="maptop"><span>LOBBY / SEKTOR 001</span><b>● SYSTEM ONLINE · DEMO</b></div><svg id="lines" viewBox="0 0 800 510" preserveAspectRatio="none"></svg><div class="legend">◈ CREATOR-ORTE　⌁ VERBINDUNGEN　DEMO-DATEN</div></div><aside class="detail"><div class="cover" id="cover"><div class="symbol" id="symbol">N</div></div><div class="meta"><span id="category">GAMING · COZY</span><span class="demo" id="placeBadge">● DEMO-ORT</span></div><h3 id="name">Nachtzug</h3><p id="desc"></p><div class="tags" id="tags"></div><div class="stats"><div class="stat"><strong id="members">2.840</strong><span>Beispiel-Mitglieder</span></div><div class="stat"><strong id="activity">LIVE</strong><span>Demo-Status</span></div></div><button class="btn primary" id="visit">Ort betreten ↗</button><div class="note">Lokale Design-Demo. Creator, Mitgliederzahlen und Live-Status sind fiktiv; ein echter Beitritt ist nicht verfügbar.</div></aside></div></section>
+
+<section id="creators"><div class="sectionhead"><div><div class="eyebrow">Die Gesichter hinter den Welten</div><h2>Triff den Creator.</h2><p>Dein eigener Planet steht im Mittelpunkt.</p></div></div>
+<div class="creator-grid">
+<article class="creator-card"><div class="creator-banner" style="background:radial-gradient(circle at 50% 45%,#ffe66b88,transparent 32%),linear-gradient(120deg,#171a36,#0b2031);border-bottom:1px solid #29434e"><span class="creator-orbit" style="color:#ffe66b;text-shadow:0 0 24px #ffe66b">T</span><span class="creator-live">★ DEIN PLANET</span></div><div class="creator-info"><div class="avatar" style="background:linear-gradient(135deg,#f4d65b,#287fbd);color:#07111b">T</div><div class="creator-title"><h3>test</h3><span>@test · Eigene Welt</span></div></div><p>Dein eigener gelb-blauer Saturn-Planet mit markanten Ringen.</p><div class="creator-foot"><span>Dein LOBBY-Universum</span><button class="mini-btn" data-open-place="test">Welt ansehen ↗</button></div></article>
+</div></section>
+<section id="features"><div class="sectionhead"><div><div class="eyebrow">Mehr als ein Profil</div><h2>Verbunden. Nicht austauschbar.</h2><p>Die Idee hinter LOBBY – als interaktive Konzeptvorschau.</p></div></div><div class="features"><article class="feature"><div class="icon">✳</div><h4>Dein eigener digitaler Ort</h4><p>Jeder Creator bekommt eine unverwechselbare Welt mit eigenem Look, Farben und Community-Identität.</p></article><article class="feature"><div class="icon">⌁</div><h4>Verbindungen zwischen Welten</h4><p>Gemeinsame Events und Creator-Kooperationen können Orte im Universum verbinden.</p></article><article class="feature"><div class="icon">◇</div><h4>Gemeinsam etwas freischalten</h4><p>Community-Missionen und kollektive Ziele könnten Orte wachsen lassen – als spätere Funktion.</p></article></div></section><footer class="footer"><span class="brand"><span class="mark">B</span><span>LOBBY<small>DEIN PLATZ IM INTERNET</small></span></span><span>Dein Platz für alles, was nach dem Stream weitergeht.</span><span>LOKALE DEMO · NICHT VERÖFFENTLICHT</span></footer></main>
+<div class="room-overlay" id="roomOverlay" role="dialog" aria-modal="true" aria-labelledby="roomTitle">
+ <div class="room-panel world-panel">
+  <div class="dashboard-shell">
+   <aside class="dashboard-sidebar">
+    <div class="dashboard-emblem">✦</div><div class="dashboard-brand">LOBBY<span>UNIVERSE</span></div>
+    <div class="dashboard-side-label">MENÜ</div>
+    <button class="dashboard-nav active" data-dashboard="home">◈ <span>Dashboard</span></button>
+    <button class="dashboard-nav" data-dashboard="stage">▣ <span>Entdecken</span></button>
+    <button class="dashboard-nav" data-dashboard="quests">✧ <span>Missionen</span></button>
+    <button class="dashboard-nav" data-dashboard="lounge">◉ <span>Community</span></button>
+    <button class="dashboard-nav" data-dashboard="chat">▤ <span>Nachrichten</span></button>
+    <button class="dashboard-nav" data-dashboard="profile">♙ <span>Profil</span></button>
+    <div class="dashboard-side-label admin-side-label">ADMINISTRATION</div>
+    <button class="dashboard-nav admin-entry" data-dashboard="admin">⚙ <span>Adminbereich</span></button>
+    <div class="dashboard-sidebar-bottom"><div class="dashboard-avatar">A</div><div><b>Dein Profil</b><small>Explorer · Level 1</small></div></div>
+   </aside>
+   <div class="dashboard-main">
+    <div class="dashboard-topbar"><div><small>LOBBY / UNIVERSE</small><strong id="dashboardWorldName">Nachtzug</strong></div><div class="dashboard-top-actions"><span class="dashboard-online">● ONLINE</span><button class="room-close" id="roomClose" aria-label="Welt verlassen">Verlassen ✕</button></div></div>
+    <div class="room-head dashboard-world-head"><div><div class="eyebrow">CREATOR-PORTAL / DEINE WELT</div><h3 id="roomTitle">Nachtzug</h3><small id="roomSubtitle">DEINE WELT · LOKALE INTERAKTIVE DEMO</small></div></div>
+  <div class="dashboard-feature-row">
+  <div class="world-banner dashboard-hero"><div class="dashboard-hero-copy"><span class="world-kicker">NOW PLAYING</span><h2 id="worldWelcome">NEXUS</h2><p class="dashboard-frontier">FRONTIER</p><p class="dashboard-subtitle">Online Co-op Shooter</p><p>Unite. Fight. Conquer.<br>The frontier is calling.</p><button class="world-action dashboard-launch" data-goto="stage">▶ &nbsp; LAUNCH GAME</button></div><div class="dashboard-mission"><small>MISSION PROGRESS</small><b>CHAPTER 3</b><strong>BREAKTHROUGH</strong><div class="dashboard-ring"><span>72%</span></div><small>◷ &nbsp; TIME PLAYED</small><b>36h 15m</b><small>♧ &nbsp; LAST PLAYED</small><b>Today</b></div></div>
+  <aside class="dashboard-collection"><div class="dashboard-panel-title"><b>MY COLLECTION</b><button data-goto="stage">VIEW ALL</button></div>
+   <div class="collection-item"><div class="collection-art art-one">◈</div><div><b>NEXUS FRONTIER</b><small>Online Co-op Shooter</small><small>Progress: 72%</small><i><span style="width:72%"></span></i></div><span>⋮</span></div>
+   <div class="collection-item"><div class="collection-art art-two">⚔</div><div><b>SHADOW ORIGINS</b><small>Stealth Action</small><small>Progress: 58%</small><i><span style="width:58%"></span></i></div><span>⋮</span></div>
+   <div class="collection-item"><div class="collection-art art-three">✦</div><div><b>GALAXY RACERS</b><small>Arcade Racing</small><small>Progress: 91%</small><i><span style="width:91%"></span></i></div><span>⋮</span></div>
+   <div class="collection-item"><div class="collection-art art-four">♜</div><div><b>ARCANE REALM</b><small>Magic Adventure</small><small>Progress: 63%</small><i><span style="width:63%"></span></i></div><span>⋮</span></div>
+  </aside>
+ </div>
+  <nav class="world-tabs" id="worldTabs"><button class="world-tab active" data-panel="overview">⌂ Übersicht</button><button class="world-tab" data-panel="stage">◉ Bühne</button><button class="world-tab" data-panel="quests">✧ Missionen <i id="questBadge">0/3</i></button><button class="world-tab" data-panel="lounge">◌ Treffpunkt</button><button class="world-tab" data-panel="chat">▤ Chat</button><button class="world-tab" data-panel="profile">◇ Dein Profil</button></nav>
+  <div class="world-content">
+   <section class="world-page active" data-page="overview">
+    <div class="dashboard-overview-grid">
+ <section class="dashboard-module dashboard-activities"><div class="dashboard-panel-title"><b>RECENT ACTIVITIES</b><button data-goto="quests">VIEW ALL</button></div><div class="activity-grid">
+  <article class="activity-card"><div class="activity-icon cyan">◎</div><b>HEADSHOT<br>CHAMPION</b><small>Get 50 headshots</small><strong>42 / 50</strong><i><span style="width:84%"></span></i><small>2h ago</small></article>
+  <article class="activity-card"><div class="activity-icon gold">♛</div><b>LOOT<br>HUNTER</b><small>Open 20 crates</small><strong>13 / 20</strong><i><span style="width:65%"></span></i><small>5h ago</small></article>
+  <article class="activity-card"><div class="activity-icon green">♧</div><b>TEAM PLAYER</b><small>Play 5 matches<br>in a squad</small><strong>3 / 5</strong><i><span style="width:60%"></span></i><small>Yesterday</small></article>
+  <article class="activity-card"><div class="activity-icon purple">✧</div><b>DAILY WARRIOR</b><small>Complete 3 daily<br>challenges</small><strong>2 / 3</strong><i><span style="width:66%"></span></i><small>Yesterday</small></article>
+ </div></section>
+ <section class="dashboard-module dashboard-player"><div class="dashboard-panel-title"><b>PLAYER PROFILE</b><button>This Week⌄</button></div><div class="player-row"><div class="player-portrait">◉</div><div class="player-data"><b>Alex ✦</b><small>Legend</small><div class="player-stats"><span><strong>128h 45m</strong><small>Play Time</small></span><span><strong>47</strong><small>Games</small></span><span><strong>320</strong><small>Achievements</small></span><span><strong>4.2K</strong><small>Score</small></span></div></div></div><div class="top-played"><span>✦</span><div><small>TOP PLAYED</small><b>NEXUS FRONTIER</b></div><small>36h 15m</small><button data-goto="stage">▶</button></div></section>
+ <section class="dashboard-module dashboard-download"><div class="dashboard-panel-title"><b>DOWNLOADING</b></div><div class="download-row"><div class="download-art">◈</div><div class="download-info"><b>VOID RUNNERS</b><small>Battle Royale</small><div class="download-track"><span></span></div><small>24.6 GB / 56.8 GB　　18.7 MB/s</small></div><div class="download-pause">Ⅱ</div></div></section>
+ <section class="dashboard-module dashboard-achievements"><div class="dashboard-panel-title"><b>RECENT ACHIEVEMENTS</b><button data-goto="quests">VIEW ALL</button></div><div class="achievement-grid"><div><span class="ach cyan">ϟ</span><b>RAPID STRIKE</b><small>25 XP</small></div><div><span class="ach gold">♜</span><b>SURVIVOR</b><small>50 XP</small></div><div><span class="ach green">▣</span><b>TREASURE SEEKER</b><small>30 XP</small></div><div><span class="ach purple">♙</span><b>MASTER TACTICIAN</b><small>40 XP</small></div><div><span class="ach red">☠</span><b>UNSTOPPABLE</b><small>60 XP</small></div></div></section>
+ </div><div class="world-grid dashboard-legacy-features"><article class="world-tile feature-tile"><span class="tile-label">COMMUNITY-MOMENT</span><h3>Die Welt lebt durch dich.</h3><p>Schau auf die Bühne, schließe eine Mission ab oder triff andere Mitglieder im Treffpunkt.</p><button class="world-action" data-goto="stage">Welt erkunden ↗</button></article><article class="world-tile"><span class="tile-label">HEUTE IN DER WELT</span><h3>Community-Abend</h3><p>Heute · 20:00 Uhr<br><span class="soft-cyan">Beispiel-Event · lokal simuliert</span></p><button class="world-action" id="eventRsvp">Teilnehmen +</button><div id="rsvpState" class="inline-state"></div></article><article class="world-tile"><span class="tile-label">DEIN FORTSCHRITT</span><div class="xp-number"><strong id="xpCount">120</strong><span>XP</span></div><p>Erledige Missionen, um Erfahrung zu sammeln.</p><div class="xp-track"><span id="xpBar"></span></div><small id="xpLevel">Level 1 · Orbit-Neuling</small></article><article class="world-tile"><span class="tile-label">VERBUNDENE MITGLIEDER</span><div class="member-stack"><span>M</span><span>N</span><span>A</span><span>+12</span></div><h3>Dein Orbit ist aktiv</h3><p>14 Beispiel-Mitglieder · keine echten Nutzer online.</p><button class="world-action" data-goto="lounge">Zum Treffpunkt ↗</button></article></div></section>
+   <section class="world-page" data-page="stage"><div class="world-section-head"><div><span class="tile-label">DIE CREATOR-BÜHNE</span><h3>Was gerade passiert</h3><p>Livestreams und Clips sind hier aktuell Platzhalter. Die echten Einbindungen kommen später.</p></div><span class="demo-chip">● DEMO-MODUS</span></div><div class="world-grid"><article class="world-tile stage-card"><div class="stage-visual">▶<span>LIVE-PLATZHALTER</span></div><h3>Der nächste Community-Stream</h3><p>Creator-Übertragung · wird später mit einem echten Stream verbunden.</p><button class="world-action" id="notifyStream">An Stream erinnern ♧</button><div id="streamState" class="inline-state"></div></article><article class="world-tile"><span class="tile-label">PINNWAND</span><h3>Neu aus der Welt</h3><div class="notice"><b>Creator</b><p>Willkommen im Orbit! Stellt euch vor und schaut euch um. ✨</p></div><div class="notice"><b>Community</b><p>Welche Aktivität sollen wir als Nächstes gemeinsam machen?</p></div></article></div></section>
+   <section class="world-page" data-page="quests"><div class="world-section-head"><div><span class="tile-label">KLEINE AUFGABEN · GROẞE COMMUNITY</span><h3>Deine Missionen</h3><p>Schließe Aufgaben ab und sammle XP. Dein Fortschritt bleibt in dieser Demo nur für die aktuelle Sitzung.</p></div></div><div class="quest-list"><article class="quest-item"><div class="quest-icon">✦</div><div><b>Erkunde die Bühne</b><p>Sieh dir an, was in der Welt passiert.</p><small>Belohnung: 30 XP</small></div><button class="quest-complete" data-quest="stage">Starten</button></article><article class="quest-item"><div class="quest-icon">◌</div><div><b>Besuche den Treffpunkt</b><p>Schau im Community-Lounge-Bereich vorbei.</p><small>Belohnung: 30 XP</small></div><button class="quest-complete" data-quest="lounge">Starten</button></article><article class="quest-item"><div class="quest-icon">▤</div><div><b>Schreibe eine Nachricht</b><p>Begrüße die Community im Demo-Chat.</p><small>Belohnung: 40 XP</small></div><button class="quest-complete" data-quest="chat">Starten</button></article></div><div class="world-tile mini-game"><span class="tile-label">BONUS-AKTIVITÄT</span><h3>Orbit-Quiz</h3><p>Was macht LOBBY zu mehr als einem Chat?</p><div class="quiz-options"><button data-answer="wrong">Nur ein größeres Chatfenster</button><button data-answer="right">Eine Welt mit Orten, Aktivitäten und Missionen</button><button data-answer="wrong">Nur ein Profil für Creator</button></div><div id="quizFeedback" class="inline-state"></div></div></section>
+   <section class="world-page" data-page="lounge"><div class="world-section-head"><div><span class="tile-label">DER DIGITALE TREFFPUNKT</span><h3>Setz dich dazu.</h3><p>Ein Raum für Community-Aktivitäten. Voice-Chat ist noch nicht verbunden und wird nur als zukünftige Funktion angezeigt.</p></div><span class="demo-chip">14 BEISPIEL-MITGLIEDER</span></div><div class="world-grid"><article class="world-tile"><span class="tile-label">LOUNGE A</span><h3>Chill-Zone</h3><p>Entspannt reden, neue Leute kennenlernen und gemeinsam Pläne machen.</p><div class="lounge-members"><span>● Mika</span><span>● Nova</span><span>● Alex</span></div><button class="world-action" id="joinChill">Lounge betreten ✓</button><div id="loungeState" class="inline-state"></div></article><article class="world-tile"><span class="tile-label">LOUNGE B</span><h3>Game-Room</h3><p>Für spontane Runden, Community-Challenges und kleine Turniere.</p><button class="world-action" id="joinGame">Game-Room betreten ↗</button><div id="gameState" class="inline-state"></div></article><article class="world-tile"><span class="tile-label">SPÄTER IN LOBBY</span><h3>Voice & Präsenz</h3><p>Räumlicher Voice-Chat, Avatare und gemeinsame Aktivitäten benötigen später einen Server und zusätzliche Technik.</p><span class="coming-soon">IN ENTWICKLUNG</span></article></div></section>
+   <section class="world-page" data-page="chat"><div class="room-body"><div class="room-chat"><h4>Community-Chat · Demo</h4><div class="chat-lines" id="chatLines"><div class="chat-line"><b>LOBBY Bot</b>Willkommen im Raum! Schreib eine Nachricht zum Ausprobieren.</div><div class="chat-line"><b>Mika</b>Schön, dass du da bist ✨</div><div class="chat-line"><b>Nova</b>Was geht heute bei euch?</div></div><form class="chat-compose" id="chatForm"><input id="chatInput" maxlength="180" placeholder="Nachricht schreiben …" aria-label="Nachricht schreiben"><button type="submit">Senden</button></form></div><aside class="room-side"><h4>Im Raum · Beispiel</h4><div class="room-member"><span class="room-dot"></span> Mika · Community</div><div class="room-member"><span class="room-dot"></span> Nova · Community</div><div class="room-member"><span class="room-dot"></span> Alex · Creator</div><p class="small-muted">Diese Namen sind Beispieldaten. Es sind keine echten Personen verbunden.</p></aside></div></section>
+   <section class="world-page" data-page="profile"><div class="world-grid"><article class="world-tile profile-tile"><div class="profile-orb" id="profileOrb">D</div><span class="tile-label">DEIN LOBBY-PROFIL</span><h3 id="displayName">Demo-Explorer</h3><p id="profileBio">Auf Entdeckung im LOBBY-Universum.</p><label for="profileName">Anzeigename</label><input class="world-input" id="profileName" maxlength="24" value="Demo-Explorer"><label for="profileBioInput">Kurz-Bio</label><textarea class="world-input" id="profileBioInput" maxlength="120">Auf Entdeckung im LOBBY-Universum.</textarea><button class="world-action" id="saveProfile">Profil dauerhaft speichern ✓</button><div id="profileState" class="inline-state"></div></article><article class="world-tile"><span class="tile-label">DEINE SAMMLUNG</span><h3>Abzeichen</h3><div class="badge-row"><span>✦ Erstbesuch</span><span>◈ Explorer</span><span>⌁ Verbunden</span></div><p>Abzeichen sind hier Vorschau-Elemente. Später können sie echte Freischaltungen werden.</p></article></div></section>
+  </div>
+   <section class="admin-area" id="adminArea" hidden>
+    <div class="admin-heading"><div><span class="admin-eyebrow">LOBBY CONTROL CENTER</span><h2>Adminbereich</h2><p>Privater Verwaltungsbereich für den Superadmin. Diese HTML-Version ist eine lokale Vorschau.</p></div><span class="admin-role">★ SUPERADMIN</span></div>
+    <div class="admin-stats"><div><small>PLATTFORMSTATUS</small><strong>Demo</strong><span>Keine Serververbindung</span></div><div><small>WELTEN</small><strong id="adminStatWorldCount">07</strong><span>Orte im Raster</span></div><div><small>NUTZER</small><strong>—</strong><span>Keine echten Kontodaten</span></div></div>
+    <div class="admin-layout"><nav class="admin-menu" aria-label="Admin-Menü"><button class="admin-menu-item active" data-admin-section="overview">◈ <span>Dashboard</span></button><button class="admin-menu-item" data-admin-section="worlds">◎ <span>Weltenverwaltung</span></button><button class="admin-menu-item" data-admin-section="users">♙ <span>Nutzerverwaltung</span></button><button class="admin-menu-item" data-admin-section="creators">✦ <span>Creator-Bewerbungen</span></button><button class="admin-menu-item" data-admin-section="reports">⚑ <span>Meldungen & Moderation</span></button><button class="admin-menu-item" data-admin-section="settings">⚙ <span>Plattform-Einstellungen</span></button></nav>
+     <div class="admin-content">
+      <section class="admin-panel active" data-admin-panel="overview"><span class="admin-eyebrow">ÜBERSICHT</span><h3>Willkommen in deiner Verwaltung</h3><p>Hier sind die sechs vorgesehenen Verwaltungsbereiche. Aktuell dienen sie als Oberfläche und Navigationsgerüst.</p><div class="admin-quick-grid admin-six-grid">
+<button data-admin-jump="overview"><b>◈ 01 · Dashboard</b><small>Plattform-Übersicht und Status</small></button>
+<button data-admin-jump="worlds"><b>◎ 02 · Weltenverwaltung</b><small>Creator-Welten prüfen und verwalten</small></button>
+<button data-admin-jump="users"><b>♙ 03 · Nutzerverwaltung</b><small>Konten, Rollen und Berechtigungen</small></button>
+<button data-admin-jump="creators"><b>✦ 04 · Creator-Bewerbungen</b><small>Anträge prüfen und entscheiden</small></button>
+<button data-admin-jump="reports"><b>⚑ 05 · Meldungen & Moderation</b><small>Meldungen prüfen und Maßnahmen verwalten</small></button>
+<button data-admin-jump="settings"><b>⚙ 06 · Plattform-Einstellungen</b><small>Zentrale Optionen für LOBBY</small></button>
+</div></section>
+      <section class="admin-panel" data-admin-panel="worlds"><span class="admin-eyebrow">BEREICH 02</span><h3>Weltenverwaltung</h3><p>Erstelle neue Planeten oder bearbeite Name, Beschreibung, Kategorie, Symbol und Farbe. Änderungen erscheinen direkt im Startseitenraster dieser lokalen Demo.</p><div class="admin-world-toolbar"><span id="adminWorldCount" class="admin-placeholder" style="margin:0;padding:9px 11px">7 Welten im Raster</span><button type="button" class="admin-action-btn primary" id="createWorldBtn">＋ Planeten erstellen</button></div><form class="admin-world-form" id="adminWorldForm"><h4 id="worldFormTitle">Neuen Planeten erstellen</h4><input type="hidden" id="worldEditId"><div class="admin-world-fields"><label>Planetname<input id="worldName" maxlength="40" required placeholder="z. B. Nebula"></label><label>Kategorie<input id="worldCategory" maxlength="30" required placeholder="z. B. Kreativ"></label><label>Untertitel<input id="worldSub" maxlength="50" required placeholder="z. B. Musik & Hangout"></label><label>Symbol (1 Zeichen)<input id="worldSymbol" maxlength="2" required value="✦"></label><label>Planetfarbe<input id="worldTone" type="color" value="#8c7cff"></label><label>Status<input id="worldActivity" maxlength="20" value="NEU"></label><label style="grid-column:1/-1">Beschreibung<textarea id="worldDesc" maxlength="300" required placeholder="Beschreibe, was Besucher in dieser Welt erwartet."></textarea></label><label style="grid-column:1/-1">Tags (mit Kommas trennen)<input id="worldTags" maxlength="160" placeholder="Community, Events, Kreativität"></label></div><div class="admin-world-form-actions"><button type="button" class="admin-world-btn" id="cancelWorldEdit">Abbrechen</button><button type="submit" class="admin-action-btn primary" id="saveWorldBtn">Planet erstellen</button></div></form><div id="adminWorldList" aria-live="polite"></div></section>
+      <section class="admin-panel" data-admin-panel="users"><span class="admin-eyebrow">BEREICH 03</span><h3>Nutzerverwaltung</h3><p>Geplante Funktionen: Nutzer suchen, Kontostatus prüfen, Rollen und Berechtigungen verwalten.</p><div class="admin-placeholder">Noch keine echten Nutzerkonten verbunden.</div></section>
+      <section class="admin-panel" data-admin-panel="creators"><span class="admin-eyebrow">BEREICH 04</span><h3>Creator-Bewerbungen</h3><p>Geplante Funktionen: Bewerbungen ansehen, annehmen, ablehnen und Rückfragen dokumentieren.</p><div class="admin-placeholder">Aktuell liegen keine echten Bewerbungen vor.</div></section>
+      <section class="admin-panel" data-admin-panel="reports"><span class="admin-eyebrow">BEREICH 05</span><h3>Meldungen & Moderation</h3><p>Geplante Funktionen: Meldungen priorisieren, prüfen, dokumentieren und Moderationsmaßnahmen verwalten.</p><div class="admin-placeholder">Meldesystem noch nicht mit einem Server verbunden.</div></section>
+      <section class="admin-panel" data-admin-panel="settings"><span class="admin-eyebrow">BEREICH 06</span><h3>Plattform-Einstellungen</h3><p>Vorgesehene zentrale Optionen für die LOBBY-Plattform.</p><label class="admin-setting"><span>Neue Creator-Bewerbungen</span><select><option>Aktiv (Vorschau)</option><option>Pausiert (Vorschau)</option></select></label><label class="admin-setting"><span>Wartungsmodus</span><select><option>Aus (Vorschau)</option><option>Ein (Vorschau)</option></select></label><div class="admin-placeholder">Diese Einstellungen speichern noch nichts dauerhaft.</div></section>
+     </div></div><p class="admin-warning">Wichtig: Die Oberfläche ist noch nicht serverseitig geschützt. Vor Veröffentlichung müssen Anmeldung, Superadmin-Rolle, Datenbank und Berechtigungen im Backend umgesetzt werden.</p>
+   </section>
+  <p class="room-disclaimer">Interaktive lokale Demo: Aktionen und Chat bleiben auf diesem Gerät bzw. in dieser Sitzung. Es gibt keine echten Nutzer, keine Serververbindung und keine echte Sprachübertragung.</p>
+   </div>
+  </div>
+ </div>
+<div class="toast" id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onerror="this.onerror=null;this.src='https://unpkg.com/@supabase/supabase-js@2'"></script>
+<script>
+// LOBBY Supabase connection. Publishable keys are intended for browser use.
+const SUPABASE_URL = 'https://otmvreckavohomqjzmfu.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_-Wn0lFKEztbu-UjzFVlfCg_vyOTHqTM';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+let lobbyDbReady = false;
+function worldToRow(p) {
+  const payload = {...p};
+  delete payload.dbId;
+  return { name: p.name, description: JSON.stringify(payload) };
+}
+function rowToWorld(row) {
+  let p = {};
+  try { p = JSON.parse(row.description || '{}'); } catch { p = {}; }
+  p.id = p.id || ('world-' + row.id);
+  p.name = row.name || p.name || 'Unbenannte Welt';
+  p.dbId = row.id;
+  p.category = p.category || 'Community'; p.sub = p.sub || 'Creator-Welt';
+  p.symbol = p.symbol || '✦'; p.x = Number.isFinite(p.x) ? p.x : 50; p.y = Number.isFinite(p.y) ? p.y : 50;
+  p.tone = p.tone || '#8c7cff'; p.members = p.members || '0'; p.activity = p.activity || 'NEU';
+  p.desc = p.desc || ''; p.tags = Array.isArray(p.tags) ? p.tags : ['Community']; p.links = Array.isArray(p.links) ? p.links : [];
+  return p;
+}
+async function persistWorld(p) {
+  const row = worldToRow(p);
+  let result;
+  if (p.dbId) result = await supabaseClient.from('lobby_worlds').update(row).eq('id', p.dbId).select().single();
+  else result = await supabaseClient.from('lobby_worlds').insert(row).select().single();
+  if (result.error) throw result.error;
+  p.dbId = result.data.id;
+}
+async function removeWorldFromDatabase(p) {
+  if (!p.dbId) throw new Error('Diese Welt ist noch nicht in der Datenbank gespeichert. Bitte Seite neu laden.');
+  const { error } = await supabaseClient.from('lobby_worlds').delete().eq('id', p.dbId);
+  if (error) throw error;
+}
+async function loadWorldsFromDatabase() {
+  const { data, error } = await supabaseClient.from('lobby_worlds').select('*').order('created_at', { ascending: true });
+  if (error) throw error;
+  if (!data.length) {
+    // First run: put the existing demo planets into the database once.
+    const seedRows = places.map(worldToRow);
+    const { data: seeded, error: seedError } = await supabaseClient.from('lobby_worlds').insert(seedRows).select();
+    if (seedError) throw seedError;
+    places.splice(0, places.length, ...seeded.map(rowToWorld));
+  } else {
+    places.splice(0, places.length, ...data.map(rowToWorld));
+  }
+  lobbyDbReady = true;
+  draw();
+  if (places.length && !places.some(p => p.id === selected)) selected = places[0].id;
+  if (selected) select(selected, false);
+  renderAdminWorlds();
+  toast('LOBBY-Welten wurden mit Supabase synchronisiert.');
+}
+const places=[
+{id:"nachtzug",name:"Nachtzug",symbol:"N",category:"Gaming",sub:"Cozy Games",x:21,y:31,tone:"#b59aff",members:"2.840",activity:"LIVE",desc:"Ein bisschen cozy, ein bisschen Chaos. Der beste Platz für Feierabend-Streams.",tags:["Cozy Games","Gemeinsam spielen","Abend-Lobby"],links:["waldwelt","afterhours"]},
+{id:"waldwelt",name:"Wald & Welt",symbol:"W",category:"Gaming",sub:"Survival",x:49,y:21,tone:"#87d8b4",members:"1.260",activity:"AKTIV",desc:"Gemeinsam bauen, entdecken und Geschichten schreiben. Neue Gesichter willkommen.",tags:["Survival","Bauen","Community-Abenteuer"],links:["nachtzug","pixelwerk","afterhours"]},
+{id:"afterhours",name:"Afterhours",symbol:"A",category:"Musik",sub:"Musik & Hangout",x:77,y:36,tone:"#ed9fba",members:"4.710",activity:"LIVE",desc:"Musik an, Alltag aus. Ein digitaler Club für Sessions, Talks und gemeinsame Nächte.",tags:["Musik","Sessions","Hangout"],links:["nachtzug","waldwelt","studioflux"]},
+{id:"pixelwerk",name:"Pixelwerk",symbol:"P",category:"Kreativ",sub:"Art & Design",x:31,y:69,tone:"#86bfff",members:"920",activity:"AKTIV",desc:"Ein kreativer Raum für digitale Kunst, Ideen, Feedback und kleine große Projekte.",tags:["Digital Art","Design","Kreativ-Sessions"],links:["waldwelt","studioflux","nachtzug"]},
+{id:"orbitclub",name:"Orbit Club",symbol:"O",category:"Chill",sub:"Just Chatting",x:63,y:72,tone:"#e9c27f",members:"3.180",activity:"LIVE",desc:"Ein entspannter Treffpunkt für Gespräche, Community-Abende und spontane Aktionen.",tags:["Just Chatting","Events","Chill"],links:["afterhours","studioflux","pixelwerk"]},
+{id:"studioflux",name:"Studio Flux",symbol:"F",category:"Kreativ",sub:"Creator Lab",x:84,y:79,tone:"#d5a0ff",members:"680",activity:"NEU",desc:"Ein offenes Creator-Lab für Experimente, Kollaborationen und neue Ideen.",tags:["Creator Lab","Collabs","Workshops"],links:["pixelwerk","orbitclub","afterhours"]},
+{id:"test",name:"test",symbol:"T",category:"Eigene Welt",sub:"Dein Saturn-Planet",x:51,y:48,tone:"#f2d45c",members:"1",activity:"DEIN PLANET",desc:"Dein eigener gelb-blauer Saturn-Planet mit markanten Ringen. Ein besonderer Ort in deinem LOBBY-Universum.",tags:["Dein Planet","Gelb-Blau","Saturn-Ringe"],links:["waldwelt","orbitclub"]}
+];const map=document.getElementById("map"),svg=document.getElementById("lines");let selected="nachtzug",filter="Alle";
+function draw(){document.querySelectorAll(".place").forEach(e=>e.remove());svg.innerHTML="";const visible=places.filter(p=>filter==="Alle"||p.category===filter),ids=new Set(visible.map(p=>p.id));visible.forEach(p=>p.links.forEach(id=>{const q=places.find(x=>x.id===id);if(!q||!ids.has(id)||p.id>q.id)return;const path=document.createElementNS("http://www.w3.org/2000/svg","path");path.setAttribute("d",`M ${p.x*8} ${p.y*5.1} Q ${(p.x+q.x)*4} ${(p.y+q.y)*2.55-25} ${q.x*8} ${q.y*5.1}`);path.setAttribute("class","link");svg.appendChild(path)}));visible.forEach(p=>{const b=document.createElement("button");b.className="place";b.dataset.placeId=p.id;b.style.left=p.x+"%";b.style.top=p.y+"%";b.style.setProperty("--tone",p.tone);b.setAttribute("aria-pressed",p.id===selected?"true":"false");b.setAttribute("aria-label",p.name+" öffnen");b.innerHTML=`<span class="planet">${p.symbol}</span><span class="pname">${p.name}</span><span class="pcat">${p.sub}</span><span class="pcount">● ${p.members} Mitglieder</span>`;b.onclick=()=>select(p.id);map.appendChild(b)});if(!ids.has(selected)&&visible.length)select(visible[0].id,false)}
+function select(id,redraw=true){const p=places.find(x=>x.id===id);if(!p)return;selected=id;document.getElementById("symbol").textContent=p.symbol;document.getElementById("symbol").style.color=p.tone;document.getElementById("category").textContent=p.category+" · "+p.sub;const badge=document.getElementById("placeBadge");if(badge)badge.textContent=p.id==="test"?"★ DEIN PLANET":"● DEMO-ORT";document.getElementById("name").textContent=p.name;document.getElementById("desc").textContent=p.desc;document.getElementById("members").textContent=p.members;document.getElementById("activity").textContent=p.activity;document.getElementById("cover").style.background=`radial-gradient(circle at 50% 35%,${p.tone}66,transparent 58%),linear-gradient(135deg,${p.tone}30,#15121e 80%)`;document.getElementById("tags").innerHTML=p.tags.map(t=>`<span class="tag">${t}</span>`).join("");if(redraw)draw();else document.querySelectorAll(".place").forEach(b=>b.setAttribute("aria-pressed",b.getAttribute("aria-label").startsWith(p.name)?"true":"false"))}
+document.getElementById("filters").onclick=e=>{const b=e.target.closest("[data-filter]");if(!b)return;filter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));draw()};document.getElementById("explore").onclick=()=>document.getElementById("universe").scrollIntoView({behavior:"smooth"});document.getElementById("creator").onclick=()=>document.getElementById("features").scrollIntoView({behavior:"smooth"});function closeRoom(){document.getElementById("roomOverlay").classList.remove("open");document.body.style.overflow="";}
+document.getElementById("visit").onclick=()=>openRoom(selected);
+document.querySelectorAll("[data-open-place]").forEach(b=>b.addEventListener("click",()=>{select(b.dataset.openPlace);document.getElementById("universe").scrollIntoView({behavior:"smooth"});}));
+document.getElementById("roomClose").onclick=async()=>{
+  const p=places.find(x=>x.id===selected);
+  try{
+    if(p) await leaveWorldMembership(p);
+    closeRoom();
+    toast('Du hast die Welt verlassen.');
+  }catch(err){/* Fehlermeldung wird in leaveWorldMembership angezeigt. */}
+};
+document.getElementById("roomOverlay").addEventListener("click",e=>{if(e.target.id==="roomOverlay")closeRoom();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeRoom();});
+document.getElementById("chatForm").addEventListener("submit",e=>{e.preventDefault();const input=document.getElementById("chatInput"),value=input.value.trim();if(!value)return;const line=document.createElement("div");line.className="chat-line";const name=document.createElement("b");name.textContent="Du";line.appendChild(name);line.appendChild(document.createTextNode(value));document.getElementById("chatLines").appendChild(line);input.value="";document.getElementById("chatLines").scrollTop=document.getElementById("chatLines").scrollHeight;});
+let lobbyAdminAuthenticated = false;
+let lobbyUserAuthenticated = false;
+const LOBBY_ADMIN_UID = "55d38911-e15a-4046-aef4-dec06dc16a60";
+const adminEntryButton = document.querySelector('[data-dashboard="admin"]');
+const adminAreaElement = document.getElementById("adminArea");
+const loginButton = document.getElementById("login");
+function setLobbyAuthState(session) {
+  lobbyUserAuthenticated = Boolean(session?.user?.id);
+  lobbyAdminAuthenticated = Boolean(session?.user?.id === LOBBY_ADMIN_UID);
+  if (adminAreaElement) adminAreaElement.hidden = true;
+  document.querySelector(".dashboard-shell")?.classList.remove("admin-mode");
+  if (adminEntryButton) adminEntryButton.hidden = !lobbyAdminAuthenticated;
+  if (loginButton) loginButton.textContent = lobbyUserAuthenticated ? (lobbyAdminAuthenticated ? "Admin abmelden" : "Abmelden") : "Login / Registrieren";
+  document.querySelectorAll('[data-dashboard]').forEach(b => b.classList.toggle('active', b.dataset.dashboard === 'home'));
+}
+setLobbyAuthState(null);
+(async () => {
+  try {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    setLobbyAuthState(session);
+  } catch (err) {
+    console.error("LOBBY Sitzung:", err);
+    setLobbyAuthState(null);
+  }
+})();
+supabaseClient.auth.onAuthStateChange((_event, session) => {
+  setLobbyAuthState(session);
+});
+loginButton.onclick = async () => {
+  if (lobbyUserAuthenticated) {
+    try {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) throw error;
+      setLobbyAuthState(null);
+      toast("Du wurdest abgemeldet.");
+    } catch (err) {
+      console.error("LOBBY Logout:", err);
+      toast("Abmelden fehlgeschlagen. Bitte erneut versuchen.");
+    }
+    return;
+  }
+  const choice = prompt("Willkommen bei LOBBY!\n\n1 = Anmelden\n2 = Neues Spielerkonto erstellen\n\nBitte 1 oder 2 eingeben:");
+  if (choice !== "1" && choice !== "2") return;
+  const email = prompt(choice === "2" ? "Welche E-Mail-Adresse möchtest du für dein LOBBY-Konto verwenden?" : "Deine E-Mail-Adresse:");
+  if (!email?.trim()) return;
+  const password = prompt(choice === "2" ? "Lege ein Passwort mit mindestens 6 Zeichen fest:" : "Dein Passwort:");
+  if (!password) return;
+  try {
+    if (choice === "2") {
+      if (password.length < 6) { toast("Bitte verwende mindestens 6 Zeichen als Passwort."); return; }
+      const { data, error } = await supabaseClient.auth.signUp({ email: email.trim(), password });
+      if (error) throw error;
+      if (data.session) {
+        setLobbyAuthState(data.session);
+        toast("Dein LOBBY-Spielerkonto wurde erstellt!");
+      } else {
+        toast("Konto angelegt! Bitte prüfe deine E-Mails und bestätige deine Adresse, bevor du dich anmeldest.");
+      }
+    } else {
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email: email.trim(), password });
+      if (error) throw error;
+      setLobbyAuthState(data.session);
+      toast(data.user?.id === LOBBY_ADMIN_UID ? "Admin erfolgreich angemeldet!" : "Du bist bei LOBBY angemeldet!");
+    }
+  } catch (err) {
+    console.error("LOBBY Authentifizierung:", err);
+    const detail = err?.message || err?.error_description || "Unbekannter Fehler. Bitte die Browser-Konsole prüfen.";
+    // Show the exact Supabase message in a dialog so it does not disappear with the short toast.
+    window.alert("LOBBY-Anmeldung / Registrierung fehlgeschlagen:\n\n" + detail + "\n\nBitte notiere diese Meldung. Sie hilft uns, die Ursache zu finden.");
+    toast("Anmeldung/Registrierung fehlgeschlagen. Details wurden angezeigt.");
+  }
+};function toast(s){const t=document.getElementById("toast");t.textContent=s;t.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove("show"),3000)}
+const completedQuests=new Set();let xp=120;
+function showWorldPage(name){document.querySelectorAll('.world-tab').forEach(b=>b.classList.toggle('active',b.dataset.panel===name));document.querySelectorAll('.world-page').forEach(p=>p.classList.toggle('active',p.dataset.page===name));if(name==='stage')completeQuest('stage',false);if(name==='lounge')completeQuest('lounge',false);if(name==='chat')document.getElementById('chatInput').focus()}
+document.getElementById('worldTabs').addEventListener('click',e=>{const b=e.target.closest('[data-panel]');if(b)showWorldPage(b.dataset.panel)});
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showWorldPage(b.dataset.goto)));
+function updateXP(){document.getElementById('xpCount').textContent=xp;document.getElementById('xpBar').style.width=Math.min(100,((xp%200)/200)*100)+'%';document.getElementById('xpLevel').textContent=xp>=300?'Level 2 · Orbit-Kenner':'Level 1 · Orbit-Neuling';document.getElementById('questBadge').textContent=completedQuests.size+'/3'}
+function completeQuest(id,reward=true){if(completedQuests.has(id))return;completedQuests.add(id);if(reward)xp+=id==='chat'?40:30;const b=document.querySelector('[data-quest="'+id+'"]');if(b){b.textContent='✓ Erledigt';b.disabled=true}updateXP()}
+document.querySelectorAll('[data-quest]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.quest;showWorldPage(id==='stage'?'stage':id==='lounge'?'lounge':'chat');if(id==='chat')toast('Schreibe eine Nachricht, um diese Mission abzuschließen.');else {completeQuest(id);toast('Mission abgeschlossen! XP gesammelt.')}}));
+document.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>{const f=document.getElementById('quizFeedback');if(b.dataset.answer==='right'){f.textContent='Richtig! LOBBY ist als interaktive Welt gedacht. +20 XP';if(!window.quizDone){xp+=20;window.quizDone=true;updateXP()}}else f.textContent='Noch nicht ganz – denk an Orte, Aktivitäten und gemeinsame Missionen.'}));
+document.getElementById('eventRsvp').onclick=()=>{document.getElementById('rsvpState').textContent='Du bist vorgemerkt (lokale Demo).';document.getElementById('eventRsvp').textContent='Vorgemerkt ✓'};
+document.getElementById('notifyStream').onclick=()=>document.getElementById('streamState').textContent='Erinnerung lokal vorgemerkt – es wird keine echte Benachrichtigung gesendet.';
+document.getElementById('joinChill').onclick=()=>document.getElementById('loungeState').textContent='Du bist in der Chill-Zone (Demo).';document.getElementById('joinGame').onclick=()=>{document.getElementById('gameState').textContent='Game-Room geöffnet: Wähle später ein Minispiel aus.';toast('Game-Room betreten (Demo).')};
+function renderLobbyProfile(n='Demo-Explorer', bio='Auf Entdeckung im LOBBY-Universum.'){
+  document.getElementById('profileName').value=n;
+  document.getElementById('profileBioInput').value=bio;
+  document.getElementById('displayName').textContent=n;
+  document.getElementById('profileBio').textContent=bio;
+  document.getElementById('profileOrb').textContent=(n.trim()[0]||'D').toUpperCase();
+}
+async function loadProfileFromDatabase(){
+  // Reset first, so one account can never see the previous account's profile in the same browser.
+  renderLobbyProfile();
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if(!session?.user?.id) return;
+  const { data, error } = await supabaseClient.from('lobby_profiles').select('display_name,bio').eq('user_id',session.user.id).maybeSingle();
+  if(error) throw error;
+  // A brand-new player with no database row gets the neutral default profile.
+  if(!data) return;
+  renderLobbyProfile(data.display_name||'Demo-Explorer', data.bio||'Auf Entdeckung im LOBBY-Universum.');
+}
+document.getElementById('saveProfile').onclick=async()=>{
+  const state=document.getElementById('profileState');
+  const n=document.getElementById('profileName').value.trim()||'Demo-Explorer';
+  const bio=document.getElementById('profileBioInput').value.trim()||'Auf Entdeckung im LOBBY-Universum.';
+  try{
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if(!session?.user?.id){state.textContent='Bitte zuerst anmelden, damit dein Profil sicher einem Konto zugeordnet werden kann.';return;}
+    const { error } = await supabaseClient.from('lobby_profiles').upsert({user_id:session.user.id,display_name:n,bio,updated_at:new Date().toISOString()},{onConflict:'user_id'});
+    if(error) throw error;
+    document.getElementById('displayName').textContent=n;
+    document.getElementById('profileBio').textContent=bio;
+    document.getElementById('profileOrb').textContent=n[0].toUpperCase();
+    state.textContent='Profil erfolgreich in Supabase gespeichert.';
+  }catch(err){console.error('LOBBY Profil speichern:',err);state.textContent='Speichern fehlgeschlagen: '+(err.message||'Supabase-Fehler');}
+};
+supabaseClient.auth.onAuthStateChange((_event, session)=>{if(session?.user?.id){setTimeout(()=>loadProfileFromDatabase().catch(err=>console.error('LOBBY Profil laden:',err)),0);}else{renderLobbyProfile();document.getElementById('profileState').textContent='';}});
+async function joinWorldMembership(world){
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if(!session?.user?.id){
+    toast('Bitte melde dich an, bevor du einer Welt beitrittst.');
+    return false;
+  }
+  if(!world?.dbId){
+    toast('Diese Welt ist noch nicht mit Supabase synchronisiert. Bitte kurz warten und erneut versuchen.');
+    return false;
+  }
+  const { error } = await supabaseClient
+    .from('lobby_world_members')
+    .upsert({ world_id: world.dbId, user_id: session.user.id }, { onConflict: 'world_id,user_id', ignoreDuplicates: true });
+  if(error){
+    console.error('LOBBY Welt beitreten:', error);
+    toast('Beitreten fehlgeschlagen: ' + (error.message || 'Supabase-Fehler'));
+    return false;
+  }
+  return true;
+}
+async function leaveWorldMembership(world){
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if(!session?.user?.id || !world?.dbId) return;
+  const { error } = await supabaseClient
+    .from('lobby_world_members')
+    .delete()
+    .eq('world_id', world.dbId)
+    .eq('user_id', session.user.id);
+  if(error){
+    console.error('LOBBY Welt verlassen:', error);
+    toast('Die Welt konnte nicht verlassen werden: ' + (error.message || 'Supabase-Fehler'));
+    throw error;
+  }
+}
+async function openRoom(id){
+  const p=places.find(x=>x.id===id)||places.find(x=>x.id===selected);
+  if(!p)return;
+  const joined=await joinWorldMembership(p);
+  if(!joined)return;
+  selected=p.id;
+  select(p.id);
+  const panel=document.querySelector('#roomOverlay .world-panel');
+  if(panel)panel.classList.toggle('basic-world',p.id!=='test');
+  document.getElementById('roomTitle').textContent=p.name;
+  document.getElementById('dashboardWorldName').textContent=p.name;
+  document.getElementById('roomSubtitle').textContent=p.category.toUpperCase()+' · CREATOR-PORTAL · MITGLIED';
+  document.getElementById('roomOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  showWorldPage('overview');
+  toast('Du bist der Welt „'+p.name+'“ beigetreten.');
+}
+
+function openAdminSection(name){document.querySelectorAll('.admin-menu-item').forEach(x=>x.classList.toggle('active',x.dataset.adminSection===name));document.querySelectorAll('.admin-panel').forEach(x=>x.classList.toggle('active',x.dataset.adminPanel===name));}
+function renderAdminWorlds(){
+ const host=document.getElementById('adminWorldList');if(!host)return;host.replaceChildren();
+ const count=document.getElementById('adminWorldCount');if(count)count.textContent=places.length+' '+(places.length===1?'Welt':'Welten')+' im Raster';const stat=document.getElementById('adminStatWorldCount');if(stat)stat.textContent=String(places.length).padStart(2,'0');
+ if(!places.length){const empty=document.createElement('div');empty.className='admin-placeholder';empty.textContent='Keine Welten vorhanden. Erstelle deinen ersten Planeten.';host.appendChild(empty);return;}
+ places.forEach(p=>{const row=document.createElement('div');row.className='admin-record'+(p.id==='test'?' is-own-world':'');const copy=document.createElement('div');copy.className='admin-record-copy';const title=document.createElement('b');title.textContent=p.name;const desc=document.createElement('span');desc.textContent=p.id==='test'?'Dein persönlicher Planet · Gelb-Blau · Saturn-Stil':p.category+' · '+p.sub;const tag=document.createElement('em');tag.textContent=p.id==='test'?'Eigene Welt':'Creator-Welt';copy.append(title,desc,tag);const actions=document.createElement('div');actions.className='admin-record-actions';const edit=document.createElement('button');edit.className='admin-edit-world';edit.type='button';edit.dataset.editWorld=p.id;edit.textContent='Bearbeiten';const del=document.createElement('button');del.className='admin-delete-world';del.type='button';del.dataset.deleteWorld=p.id;del.textContent='Welt löschen';del.setAttribute('aria-label','Welt '+p.name+' löschen');actions.append(edit,del);row.append(copy,actions);host.appendChild(row);});
+}
+const worldForm=document.getElementById('adminWorldForm');
+function resetWorldForm(){worldForm.reset();document.getElementById('worldEditId').value='';document.getElementById('worldFormTitle').textContent='Neuen Planeten erstellen';document.getElementById('saveWorldBtn').textContent='Planet erstellen';document.getElementById('worldSymbol').value='✦';document.getElementById('worldTone').value='#8c7cff';document.getElementById('worldActivity').value='NEU';}
+function beginWorldEdit(id){const p=places.find(x=>x.id===id);if(!p)return;document.getElementById('worldEditId').value=p.id;document.getElementById('worldName').value=p.name;document.getElementById('worldCategory').value=p.category;document.getElementById('worldSub').value=p.sub;document.getElementById('worldSymbol').value=p.symbol;document.getElementById('worldTone').value=/^#[0-9a-f]{6}$/i.test(p.tone)?p.tone:'#8c7cff';document.getElementById('worldActivity').value=p.activity;document.getElementById('worldDesc').value=p.desc;document.getElementById('worldTags').value=(p.tags||[]).join(', ');document.getElementById('worldFormTitle').textContent='Planeten bearbeiten: '+p.name;document.getElementById('saveWorldBtn').textContent='Änderungen speichern';worldForm.classList.add('open');worldForm.scrollIntoView({behavior:'smooth',block:'nearest'});}
+document.getElementById('createWorldBtn').addEventListener('click',()=>{resetWorldForm();worldForm.classList.add('open');document.getElementById('worldName').focus();});
+document.getElementById('cancelWorldEdit').addEventListener('click',()=>{worldForm.classList.remove('open');resetWorldForm();});
+worldForm.addEventListener('submit',async e=>{e.preventDefault();if(!lobbyDbReady){toast('Supabase ist noch nicht bereit. Bitte warte auf die Synchronisierung und versuche es erneut.');return;}const editId=document.getElementById('worldEditId').value;const name=document.getElementById('worldName').value.trim();const category=document.getElementById('worldCategory').value.trim();const sub=document.getElementById('worldSub').value.trim();const symbol=document.getElementById('worldSymbol').value.trim().slice(0,2);const tone=document.getElementById('worldTone').value;const activity=document.getElementById('worldActivity').value.trim()||'NEU';const desc=document.getElementById('worldDesc').value.trim();const tags=document.getElementById('worldTags').value.split(',').map(x=>x.trim()).filter(Boolean).slice(0,8);if(!name||!category||!sub||!symbol||!desc){toast('Bitte fülle alle Pflichtfelder aus.');return;}if(places.some(p=>p.name.toLowerCase()===name.toLowerCase()&&p.id!==editId)){toast('Dieser Planetenname wird bereits verwendet.');return;}
+ if(editId){const p=places.find(x=>x.id===editId);if(!p)return;Object.assign(p,{name,category,sub,symbol,tone,activity,desc,tags:tags.length?tags:['Community']});if(selected===p.id)select(p.id,false);toast('Planet „'+name+'“ wurde aktualisiert.');}
+ else{let id=name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'planet';const base=id;let suffix=2;while(places.some(p=>p.id===id))id=base+'-'+suffix++;const slots=[[15,49],[39,43],[72,20],[88,53],[13,82],[46,83],[70,55],[35,16],[86,30],[24,56]];const used=new Set(places.map(p=>p.x+','+p.y));const pos=slots.find(q=>!used.has(q[0]+','+q[1]))||[12+(places.length*13)%76,18+(places.length*17)%65];places.push({id,name,category,sub,symbol,x:pos[0],y:pos[1],tone,members:'0',activity,desc,tags:tags.length?tags:['Community'],links:[]});selected=id;filter='Alle';document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.filter==='Alle'));draw();select(id,false);toast('Planet „'+name+'“ wurde erstellt und ins Startseitenraster gesetzt.');}
+ try { const saved = places.find(p => p.id === (editId || selected)); if (!saved) throw new Error('Die Welt wurde in der Oberfläche nicht gefunden.'); await persistWorld(saved); } catch (err) { console.error(err); try { await loadWorldsFromDatabase(); } catch (reloadErr) { console.error('Neuladen nach Speicherfehler:', reloadErr); } toast('Supabase-Speichern fehlgeschlagen: ' + (err.message || 'Bitte Verbindung und Berechtigungen prüfen.')); return; }
+ worldForm.classList.remove('open');resetWorldForm();draw();renderAdminWorlds();});
+document.getElementById('adminWorldList')?.addEventListener('click',async e=>{const edit=e.target.closest('[data-edit-world]');if(edit){beginWorldEdit(edit.dataset.editWorld);return;}const b=e.target.closest('[data-delete-world]');if(!b)return;const id=b.dataset.deleteWorld;const p=places.find(x=>x.id===id);if(!p)return;if(!lobbyDbReady){toast('Supabase ist noch nicht bereit. Löschen wurde nicht ausgeführt.');return;}if(!window.confirm('Soll die Welt „'+p.name+'“ wirklich aus dem Startseitenraster entfernt werden?'))return;const idx=places.findIndex(x=>x.id===id);if(idx<0)return;try{await removeWorldFromDatabase(p);}catch(err){console.error(err);toast('Löschen fehlgeschlagen: '+(err.message||'Supabase-Fehler'));return;}places.splice(idx,1);if(selected===id){selected=places[0]?.id||'';}draw();if(selected)select(selected,false);renderAdminWorlds();toast('Welt „'+p.name+'“ wurde aus der lokalen Demo entfernt.');});
+renderAdminWorlds();
+loadWorldsFromDatabase().catch(err => { console.error('Supabase-Verbindung:', err); toast('Supabase nicht bereit: prüfe RLS-/Tabellenrechte. Demo bleibt sichtbar.'); });
+document.querySelectorAll('[data-admin-section]').forEach(b=>b.addEventListener('click',()=>openAdminSection(b.dataset.adminSection)));document.querySelectorAll('[data-admin-jump]').forEach(b=>b.addEventListener('click',()=>openAdminSection(b.dataset.adminJump)));
+document.querySelectorAll('[data-dashboard]').forEach(b=>b.addEventListener('click',()=>{const target=b.dataset.dashboard;const shell=document.querySelector('.dashboard-shell');if(target==='admin'&&!lobbyAdminAuthenticated){if(document.getElementById('adminArea'))document.getElementById('adminArea').hidden=true;shell.classList.remove('admin-mode');toast('Bitte zuerst als Admin anmelden.');return;}document.querySelectorAll('[data-dashboard]').forEach(x=>x.classList.toggle('active',x===b));if(target==='admin'){shell.classList.add('admin-mode');document.getElementById('adminArea').hidden=false;openAdminSection('overview');document.querySelector('.dashboard-topbar small').textContent='LOBBY / ADMINISTRATION';document.querySelector('.dashboard-topbar strong').textContent='Adminbereich';}else{shell.classList.remove('admin-mode');document.getElementById('adminArea').hidden=true;document.querySelector('.dashboard-topbar small').textContent='LOBBY / UNIVERSE';document.querySelector('.dashboard-topbar strong').textContent=document.getElementById('dashboardWorldName').textContent;showWorldPage(target==='home'?'overview':target);document.querySelectorAll('.world-tab').forEach(x=>x.classList.toggle('active',x.dataset.panel===(target==='home'?'overview':target)));}}));
+document.getElementById('worldTabs').addEventListener('click',e=>{const b=e.target.closest('[data-panel]');if(!b)return;document.querySelector('.dashboard-shell').classList.remove('admin-mode');document.getElementById('adminArea').hidden=true;document.querySelectorAll('[data-dashboard]').forEach(x=>x.classList.toggle('active',x.dataset.dashboard===(b.dataset.panel==='overview'?'home':b.dataset.panel)));});
+
+draw();select("nachtzug",false);
+</script></body></html>
